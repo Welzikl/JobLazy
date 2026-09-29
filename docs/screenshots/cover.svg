@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+  <title id="title">JobLazy — Find your next move.</title>
+  <desc id="desc">A calm green and cream cover. Your CV, a focused search, and an application you review. Windows early access, powered by Luna.</desc>
+  <rect width="1200" height="460" rx="24" fill="#f5f3ea"/>
+  <rect x="32" y="32" width="1136" height="396" rx="16" fill="none" stroke="#ced6c8"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="72" y="92" fill="#31594a" font-size="25" font-weight="700">JobLazy<tspan fill="#dc754d">.</tspan></text>
+    <text x="72" y="170" fill="#19382d" font-size="58" font-weight="700">Find your next move.</text>
+    <text x="74" y="212" fill="#506356" font-size="23">Less searching. More time for the jobs that matter.</text>
+    <g transform="translate(72 267)">
+      <rect width="314" height="94" rx="12" fill="#e2e9da"/>
+      <text x="22" y="32" fill="#55724d" font-size="14" font-weight="700" letter-spacing="2">01 / YOUR EXPERIENCE</text>
+      <text x="22" y="67" fill="#19382d" font-size="24" font-weight="600">Start with your CV</text>
+    </g>
+    <g transform="translate(407 267)">
+      <rect width="314" height="94" rx="12" fill="#e2e9da"/>
+      <text x="22" y="32" fill="#55724d" font-size="14" font-weight="700" letter-spacing="2">02 / YOUR NEXT ROLE</text>
+      <text x="22" y="67" fill="#19382d" font-size="24" font-weight="600">Explore your shortlist</text>
+    </g>
+    <g transform="translate(742 267)">
+      <rect width="386" height="94" rx="12" fill="#19382d"/>
+      <text x="22" y="32" fill="#b5c6ab" font-size="14" font-weight="700" letter-spacing="2">03 / YOUR DECISION</text>
+      <text x="22" y="67" fill="#f5f3ea" font-size="24" font-weight="600">Review. Then apply.</text>
+    </g>
+    <text x="74" y="402" fill="#506356" font-size="15">WINDOWS EARLY ACCESS</text>
+    <text x="1128" y="402" text-anchor="end" fill="#506356" font-size="15">LUNA ONLY · YOU CONTROL SUBMIT</text>
+  </g>
+</svg>

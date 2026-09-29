@@ -5,7 +5,7 @@ This is an early-access local application. The friend launcher uses GPT-6 Luna t
 ## Set up once
 
 1. Install Python 3.12 or later (include the Python launcher), Node.js 22 or later, and Edge or Chrome. Install Codex and sign in with your own account using the [official quickstart](https://learn.chatgpt.com/docs/quickstart).
-2. Download the tested JobLazy release ZIP when published. Extract it completely into a folder you can write to. Do not run it from inside the ZIP.
+2. Accept your repository invitation and sign in to GitHub, then [download the tested Windows ZIP](https://github.com/Welzikl/JobLazy/releases/download/v0.1.0-rc.2/JobLazy-0.1.0-rc.2-windows.zip). Extract it completely into a folder you can write to. Do not run it from inside the ZIP.
 3. Double-click **Setup.cmd**. It creates a local `.venv`, installs the pinned Python dependencies and checks prerequisites. It does not install system programs or purchase credits. Internet access is needed for dependency downloads.
 4. Double-click **Start JobLazy.cmd**. Keep its window open while using JobLazy. This always starts the friend preset and selects Edge or Chrome automatically.
 

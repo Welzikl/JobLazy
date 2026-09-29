@@ -1,22 +1,33 @@
 # Current verification — 29 September 2026
 
-JobLazy 0.1.0-rc.1 is a Windows friend-test candidate. It is not yet a published or fully verified release.
+[JobLazy 0.1.0-rc.2](https://github.com/Welzikl/JobLazy/releases/tag/v0.1.0-rc.2) is published as a private Windows prerelease for friend testing.
 
-## Implemented
+## Exact download
 
-The friend preset uses Luna throughout and preserves personal defaults. Six complementary search missions run with bounded concurrency. Selected-role assessment, reviewed CV generation, employer-form preparation, confirmed answers, same-session resume and outcome recording are connected to the browser interface. Shared local safeguards enforce 25 processing attempts and 50 uncached model-request reservations per UTC day, including assisted work. Setup and launch scripts check prerequisites and select the friend preset.
+- File: `JobLazy-0.1.0-rc.2-windows.zip` (929,138 bytes).
+- SHA-256: `b7704609e308c3737e1d63452898cddf7a87cdfeb9b3f795847aaa82013ad450`.
+- Tested source/tag: `b8ec944b5c3971e27ed6671fbeb3eed83c18bfb8` / `v0.1.0-rc.2`.
+- Uploaded to GitHub, downloaded through the signed-in browser, and checked: SHA-256 matches the tested ZIP.
+- Later changes on `main` improve documentation only; the release ZIP and source tag remain unchanged. Older status text inside the frozen ZIP predates final verification; use this page and the companion release report for final results.
 
-## Evidence
+## Windows verification
 
-- Disposable-source full suite: 535 tests, 534 passed and one fictional form-location mismatch. The fixture was corrected to accept the fictional candidate's city.
-- Corrected connected friend journey plus allowance/application/dashboard regressions: 18 passed in 28.457 seconds. The answer reached the form, the form was prepared, the original CV attachment was retained and no submission occurred.
-- Clean-directory Windows setup installed pinned dependencies into a new virtual environment. The actual launcher served HTTP 200, disclosed Luna and started without a personal profile.
-- These tests use model doubles and local employer forms. They establish the connected implementation, not live Luna quality, actual account capacity or broad employer-site reliability.
+All **539 tests passed**, with zero failures and zero skips, in 487.579 seconds from a clean extraction of the exact ZIP. Setup created a new virtual environment, installed pinned dependencies, and passed prerequisite checks. The actual launcher served onboarding with HTTP 200, disclosed Luna, and started without a personal profile. Source hashes, private-data audit, vendor hashes/licenses and local documentation links passed.
 
-Exact ZIP extraction/testing, bounded live Luna checks and GitHub publication/readback remain. Windows and Ubuntu CI are configured but have not run remotely for this candidate.
+This was an existing Windows development PC, not a fresh Windows VM or the friend's PC. The joined browser journey used model doubles, fictional candidate facts and a local employer form. It covered profile confirmation, six search missions, assessment, reviewed PDF, form preparation, confirmed answers, same-session continuation and recorded outcome. The attached CV was preserved and no form was submitted.
 
-See [feature inventory](FEATURES.md), [release findings](FRIEND-TEST-REVIEW.md), [usage](ECONOMICAL-USAGE.md) and [Windows instructions](WINDOWS-QUICKSTART.md). Older engineering observations in this development checkout are historical and are excluded from the friend download.
+## Separate live Luna trial
 
-## Later candidate checks
+Real Luna calls with a fictional candidate completed intake, planning, six scouts, preliminary review, selected-role assessment and CV generation. Search/review took 85.906 seconds: 18 leads, three duplicates, three verified postings, 12 rejected links and one preliminary recommendation. Full assessment rated that role a 48/100 stretch.
 
-The exact 0.1.0-rc.1 ZIP passed all 535 tests in 484.888 seconds, plus manifest/audit/setup/launch checks. A bounded live Luna trial completed all stages through a local PDF, with 12 requests and five processing attempts, and no real employer form actions. Its one recommendation assessed as a 48/100 stretch. Manual inspection exposed an unsupported authorship paraphrase; the next candidate adds generation/cache guards and explicit UI recovery. Focused regressions pass. Consult the verification report shipped alongside the final download for its exact hash and test results.
+Manual CV inspection found unsupported authorship wording. Generation and cached-material validation were corrected, and live regeneration retained the supported original wording. The full trial including correction used 14 model request reservations and seven processing attempts. The corrected live runtime matches the packaged runtime. No real employer form was filled or submitted.
+
+That is limited workflow evidence, not proof of broad search quality, employer-form coverage or 25 successful applications a day. The friend's account capacity is untested.
+
+## Remote CI and remaining limits
+
+Windows and Ubuntu workflows are published. Check the [actual GitHub Actions results](https://github.com/Welzikl/JobLazy/actions); the 539-test result above is local Windows evidence, not a claim that remote CI passed.
+
+Final Submit remains manual. Employer forms vary; scanned CVs need readable text; supporting-link content attribution is unfinished. Employer replies and LinkedIn outreach are outside this release. Review every generated CV and employer field.
+
+[Full release verification report](RELEASE-VERIFICATION.md) · [Features](FEATURES.md) · [Windows help](WINDOWS-QUICKSTART.md) · [Usage](ECONOMICAL-USAGE.md)
