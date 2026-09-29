@@ -26,7 +26,11 @@ That is limited workflow evidence, not proof of broad search quality, employer-f
 
 ## Remote CI and remaining limits
 
-Windows and Ubuntu workflows are published. Check the [actual GitHub Actions results](https://github.com/Welzikl/JobLazy/actions); the 539-test result above is local Windows evidence, not a claim that remote CI passed.
+Windows and Ubuntu workflows are published. The [initial source run](https://github.com/Welzikl/JobLazy/actions/runs/36592185967) had one Ubuntu failure in `test_misleading_conflicting_and_unrelated_receipts_stay_unknown`: a conflicting fixture receipt was classified as submitted instead of unknown. A [separate tag run of the same source](https://github.com/Welzikl/JobLazy/actions/runs/36592544143) passed Ubuntu. Windows jobs were still running at publication readback. Remote CI is therefore **not certified green**.
+
+The receipt reader enumerates elements and reads their text in separate browser calls, which can observe a changing page inconsistently. This is an unresolved intermittent receipt-observation issue in the automated submission test path. The friend workflow leaves final submission and outcome recording to the user. Do not interpret the passing local suite or the separate Ubuntu pass as resolving this issue.
+
+Check [GitHub Actions](https://github.com/Welzikl/JobLazy/actions) for later results. The exact-ZIP 539-test result above remains separate local Windows evidence.
 
 Final Submit remains manual. Employer forms vary; scanned CVs need readable text; supporting-link content attribution is unfinished. Employer replies and LinkedIn outreach are outside this release. Review every generated CV and employer field.
 

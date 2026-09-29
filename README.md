@@ -97,7 +97,7 @@ Email replies and LinkedIn outreach are planned for later. Some employer forms w
 
 A separate live Luna trial completed CV intake, search, assessment and CV generation. Search and review took about **86 seconds**, but produced only **one stretch recommendation** from three verified postings. That small sample does not establish broad search quality, form reliability or performance on your account.
 
-The ZIP was downloaded back from GitHub and its SHA-256 matched the tested file. Remote CI status is shown in [GitHub Actions](https://github.com/Welzikl/JobLazy/actions); the local result above is separate.
+The ZIP was downloaded back from GitHub and its SHA-256 matched the tested file. Remote CI has an intermittent submission-receipt test failure under review; see [current verification](docs/STATUS.md). The local result above is separate. This remains an early-access release.
 
 [Verification details](docs/STATUS.md) · [Full feature list](docs/FEATURES.md) · [Release evidence](https://github.com/Welzikl/JobLazy/releases/tag/v0.1.0-rc.2)
 
