@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "example_only": true,
+  "cases": [
+    {
+      "id": "operations",
+      "job": {
+        "url": "https://example.test/jobs/operations",
+        "company": "Fictional Example Company",
+        "title": "Operations Associate",
+        "description": "Coordinate onboarding and operational projects.",
+        "location": "London, United Kingdom"
+      },
+      "split": "development",
+      "category": "obvious_match",
+      "judgment": {
+        "worthwhile": true,
+        "job_hash": "bd0d30d2028ced199afbc8ea4a4bf39e1b87b91481982a01dada1cb59affa688",
+        "source": {
+          "kind": "user",
+          "quote": "Fictional example judgment: interested",
+          "recorded_at": "2026-01-01",
+          "basis": "Fictional demonstration, not real user feedback"
+        }
+      }
+    },
+    {
+      "id": "engineer",
+      "job": {
+        "url": "https://example.test/jobs/engineer",
+        "company": "Fictional Example Company",
+        "title": "Senior Software Engineer",
+        "description": "Build distributed systems using Rust and Kubernetes.",
+        "location": "London, United Kingdom"
+      },
+      "split": "development",
+      "category": "misleading_keywords",
+      "judgment": {
+        "worthwhile": false,
+        "job_hash": "6fdd6bc54f9c0fd980c112aaae364ae26d3362a50d4cf435f76b494a3707c659",
+        "source": {
+          "kind": "user",
+          "quote": "Fictional example judgment: not interested",
+          "recorded_at": "2026-01-01",
+          "basis": "Fictional demonstration, not real user feedback"
+        }
+      }
+    },
+    {
+      "id": "senior",
+      "job": {
+        "url": "https://example.test/jobs/senior",
+        "company": "Fictional Example Company",
+        "title": "Senior Operations Lead",
+        "description": "Requires 6 years of experience, ideally in SaaS.",
+        "location": "London, United Kingdom"
+      },
+      "split": "development",
+      "category": "hard_constraint",
+      "known_block": {
+        "policy_reason": "The fictional profile caps mandatory experience at five years.",
+        "source": {
+          "kind": "reviewed_posting",
+          "quote": "Requires 6 years of experience, ideally in SaaS."
+        }
+      }
+    }
+  ]
+}

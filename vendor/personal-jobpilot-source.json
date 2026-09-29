@@ -1,0 +1,26 @@
+{
+  "repository": "TheCromazone/Personal-JobPilot",
+  "commit": "a582c29d0f1aed97b93b13d843671487ab8c25d3",
+  "files": [
+    {
+      "path": "LICENSE",
+      "gitBlob": "fce5a049011e15a640dce470af899cb29bb665a2"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "984035cd918bf90ac158802a4b8cd1c5342b9e5d"
+    },
+    {
+      "path": "agents/autofill_mapper.py",
+      "gitBlob": "be92f3bca1ea0da50363bfb955a4d144b1b4a7a7"
+    },
+    {
+      "path": "browser-extension/content/fill.js",
+      "gitBlob": "b6f7f223636aa3906e4193548c4c231a69b87a7f"
+    },
+    {
+      "path": "browser-extension/content/scan.js",
+      "gitBlob": "83cf267258b731b2945f60f629b759fa25dfaaac"
+    }
+  ]
+}

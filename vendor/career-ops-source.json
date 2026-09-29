@@ -1,0 +1,119 @@
+{
+  "source": "User-authorized local career-ops-hermes worktree",
+  "sourceHead": "f9927deb2fd564c32542d785966157adc6d40b25",
+  "note": "Dirty worktree; copied-file hashes identify the actual snapshot.",
+  "files": [
+    {
+      "path": "browser-extract.mjs",
+      "sha256": "19948e7bd0e8be539a72487358b4d93743d5e1c995bac3f9da3655fc27fd9989"
+    },
+    {
+      "path": "build-cv-html.mjs",
+      "sha256": "3d610b443a741418b42a85ad4cbb81e33aaa5bba4216f5a65dd3f7b1fb01c13c"
+    },
+    {
+      "path": "cv-sections-core.mjs",
+      "sha256": "390d7e2dd67bd2cd10753436d236030c170f36f6502070e32c11be0a58e7425c"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "51989d2589b2aa87ca6cbb253391bcb476a21cbafdc71eea4410548538510870"
+    },
+    {
+      "path": "providers/a16z-speedrun-talent.mjs",
+      "sha256": "7923cfac12fb068f1808a2cc1beaa3bc60918551368e84d1a431d3cab865351b"
+    },
+    {
+      "path": "providers/arbeitnow.mjs",
+      "sha256": "0dd25883f262db9d292708ca4466c42686963c5e3e87d839922e86aa63284ea9"
+    },
+    {
+      "path": "providers/ashby.mjs",
+      "sha256": "e1beab7cee2fdb111eb93f4eae5ec408cf9c1bc711a3074043876aaeeac5e5bc"
+    },
+    {
+      "path": "providers/echojobs.mjs",
+      "sha256": "f6d750272635a0e8f1687b8331786e45eb194c214ed00e2a6d9dc065c0bbe21e"
+    },
+    {
+      "path": "providers/greenhouse.mjs",
+      "sha256": "fa1ae764f0bb51095c3ac1465c7eb1b0b738c2a246be9d5fb6c444db0192a983"
+    },
+    {
+      "path": "providers/hackernews.mjs",
+      "sha256": "c22a4265ee0e70101e66d166969c91746eba6312238a90eb6303f2464e22fd5a"
+    },
+    {
+      "path": "providers/himalayas.mjs",
+      "sha256": "99c76453b0044bbeb2567552a94c7f0d8caef655ebf5d2f65c16533d640d351b"
+    },
+    {
+      "path": "providers/jobicy.mjs",
+      "sha256": "f920267b4c1f74f0aa292fdbf344d4a8ee6bbd163eb90cdccf1102101396f7ed"
+    },
+    {
+      "path": "providers/landingjobs.mjs",
+      "sha256": "e300d1d2c861bfcb558c8387e5ec9349ec6b455211fb1f0a28d511995c25c966"
+    },
+    {
+      "path": "providers/lever.mjs",
+      "sha256": "7718b61e2bf92877b6f9379e736f4396b515ca9ea57228128fd8612cbcf337c1"
+    },
+    {
+      "path": "providers/remoteok.mjs",
+      "sha256": "c104b5896aaa3b2140675bab75f4e0d7547340e83bf6e2c39661d57b01ebb822"
+    },
+    {
+      "path": "providers/remotive.mjs",
+      "sha256": "508326a97863d391fb03d2e5328ebf5b4e7ba069210e12e82595a9b499fd6fc3"
+    },
+    {
+      "path": "providers/thehub.mjs",
+      "sha256": "086276a4ff98476998fd47fc40b035794d3babb998c9bf87de51a435778a82ff"
+    },
+    {
+      "path": "providers/themuse.mjs",
+      "sha256": "59410ca7adf08caf008b6a9834999e765367782c0fff6b427af935f61deb8852"
+    },
+    {
+      "path": "providers/weworkremotely.mjs",
+      "sha256": "a7e92c939ca109e7134bd90beb3e0f69fc2ba530240e978eded9392c6d1377f7"
+    },
+    {
+      "path": "providers/workingnomads.mjs",
+      "sha256": "34cd70489b9b75ce07a723d31ffca84b3ca4986a1be4d8b15893d951bfba8fe5"
+    },
+    {
+      "path": "providers/_dns-cache.mjs",
+      "sha256": "34cec002b249be49613e17a7e9a5267147eb8f29f7e6eb92a52c0158ddc7f029"
+    },
+    {
+      "path": "providers/_html-entities.mjs",
+      "sha256": "acf4f43bf31118d4166444d0f3e5dd067d6a8999ce96906b30f679e376905726"
+    },
+    {
+      "path": "providers/_http.mjs",
+      "sha256": "32372d4e90923b73284207b7e6208b205dad6dca6c182debd65e85c2bd67be92"
+    },
+    {
+      "path": "providers/_types.js",
+      "sha256": "41f407bdd6c85759cd5c6f834f81989b5e8d507dac70e7716adc1daf97cfa218"
+    },
+    {
+      "path": "templates/cv-template.html",
+      "sha256": "54265f68ede61d58262ba125666caa7895d31afdd7742b4ea47a56e50f910ce0"
+    },
+    {
+      "path": "user-agent.mjs",
+      "sha256": "b6969127ced32859ea20d94f760bbbfc6f3955bee97bef3d28a01fad5f215f46"
+    },
+    {
+      "path": "providers/amazon.mjs",
+      "sha256": "d6154678926b188f6aec4a979e8b352d11ee4f2bea7a910c5135e0de96cc5145"
+    },
+    {
+      "path": "providers/smartrecruiters.mjs",
+      "sha256": "a5602dcdf1baf6d7b11fc453a6242b05e50fc6a901257e0dd663089492cd573f"
+    }
+  ]
+}

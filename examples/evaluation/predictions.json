@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "name": "Fictional demonstration",
+  "predictions": [
+    {
+      "id": "operations",
+      "job_hash": "bd0d30d2028ced199afbc8ea4a4bf39e1b87b91481982a01dada1cb59affa688",
+      "profile_hash": "fictional-example-profile",
+      "assessment": {
+        "score": 85,
+        "eligible": true,
+        "fit_category": "worthwhile_stretch",
+        "assessment_version": 5
+      }
+    },
+    {
+      "id": "engineer",
+      "job_hash": "6fdd6bc54f9c0fd980c112aaae364ae26d3362a50d4cf435f76b494a3707c659",
+      "profile_hash": "fictional-example-profile",
+      "assessment": {
+        "score": 18,
+        "eligible": true,
+        "fit_category": "poor_fit",
+        "assessment_version": 5
+      }
+    },
+    {
+      "id": "senior",
+      "job_hash": "5cee603add89adc7fe9fad9944dff4e07747736c570e69959546eea7f3685a9b",
+      "profile_hash": "fictional-example-profile",
+      "assessment": {
+        "score": 85,
+        "eligible": false,
+        "fit_category": "poor_fit",
+        "assessment_version": 5
+      }
+    }
+  ]
+}

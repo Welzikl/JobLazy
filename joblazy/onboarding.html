@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Set up your profile · JobLazy</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f6f5f0;color:#17201c;font:16px/1.5 system-ui,sans-serif}main{max-width:900px;margin:auto;padding:32px 20px 70px}h1{font-size:32px;letter-spacing:-1px}h2{font-size:23px}h3{font-size:18px}.muted{color:#59675f}section,.entry{background:white;border:1px solid #dce1d9;border-radius:14px;padding:24px;margin:18px 0}label{display:block;margin:14px 0 6px;font-weight:600}input,textarea,select{display:block;width:100%;padding:10px;border:1px solid #b8c4ba;border-radius:6px;background:white;color:inherit;font:inherit}textarea{min-height:85px;resize:vertical}input[type=checkbox]{display:inline;width:auto;margin-right:9px}button,.button{display:inline-block;border:0;border-radius:8px;padding:11px 17px;background:#245a40;color:white;font:inherit;cursor:pointer;text-decoration:none}button:disabled{opacity:.55;cursor:wait}.secondary{background:#e9eee6;color:#17201c}.row{display:flex;gap:16px;flex-wrap:wrap}.row>*{flex:1;min-width:200px}.entry{background:#f9faf7;padding:16px}.notice{padding:16px;background:#fff0df;border-radius:8px;white-space:pre-wrap;margin:15px 0}.hidden{display:none}pre{white-space:pre-wrap;max-height:300px;overflow:auto;font:14px/1.5 system-ui}nav{color:#59675f;margin-bottom:25px}.small{font-size:14px}
+</style></head><body><main>
+<nav>JobLazy / Your profile</nav><h1>Start with your story.</h1>
+<p>Selected model: <strong>__MODEL__</strong>. Extracted text is sent through your Codex account when you request a draft.</p>
+<p class="muted">Your experience tells us what you can do. Your search brief tells us where you want to go next.</p>
+<div id="message" role="status" aria-live="polite"></div>
+<section id="upload"><h2>1. Upload your CV</h2>
+<p>Choose your CV first. You can add up to four supporting documents about your own work, such as project summaries or a portfolio export.</p>
+<label for="cv">CV (PDF, DOCX or text, up to 8 MB)</label><input id="cv" type="file" accept=".pdf,.docx,.txt,.md">
+<label for="support">Supporting documents (optional)</label><input id="support" type="file" accept=".pdf,.docx,.txt,.md" multiple>
+<p class="small muted">Original documents stay in your private local workspace. Extracted text is sent to your signed-in Codex account to create a draft and follow-up questions. Nothing becomes your saved profile until you review and confirm it.</p>
+<button id="connect" class="secondary">Connect Codex</button> <button id="extract">Extract a draft with Codex</button></section>
+<div id="review" class="hidden"><p id="draftStatus" class="small muted" role="status">Draft saved locally. Your profile is not confirmed yet.</p><button id="saveDraft" class="secondary">Save draft</button>
+<section><h2>2. Check the extracted facts</h2><p>Edit anything incorrect, remove anything that is not yours, and leave unknown details blank.</p>
+<div id="uncertainties"></div><div id="identity" class="row"></div>
+<label for="summary">Your professional summary</label><textarea id="summary"></textarea>
+<h3>Experience</h3><p class="small muted">No employment yet? Leave this empty and add education, projects, volunteering or other confirmed work below.</p><div id="experience"></div><button class="secondary" data-add="experience">Add experience</button>
+<h3>Education</h3><div id="education"></div><button class="secondary" data-add="education">Add education</button>
+<h3>Projects</h3><div id="projects"></div><button class="secondary" data-add="projects">Add project</button>
+<label for="skills">Skills (one per line)</label><textarea id="skills"></textarea>
+<details><summary>Compare against the extracted source text</summary><div id="sources"></div></details></section>
+<section><h2>3. What else should we know?</h2><p>Answer the relevant questions below. Skipping one leaves it unknown; we won’t invent an answer.</p><div id="questions"></div>
+<label for="extra">Other responsibilities, achievements or projects missing from your CV</label><textarea id="extra" placeholder="Explain what you personally did, where, and the result. Include numbers only if you can support them."></textarea>
+<label for="links">Supporting portfolio or project links (one per line)</label><textarea id="links" placeholder="https://..."></textarea><p class="small muted">Links are saved as references. This step does not read their contents or treat them as verified experience.</p></section>
+<section><h2>4. Where do you want to go next?</h2><p>Your preferences start empty. You will not inherit another person's job targets.</p><div id="preferences"></div></section>
+<section><h2>5. Confirm your profile</h2><label><input id="confirmed" type="checkbox">I have reviewed and corrected this profile. The experience and additional statements are mine and accurate to the best of my knowledge.</label>
+<p class="small muted">Search preferences are wishes, not claims about experience. Application-specific questions can be answered later, and you retain the final Submit action.</p><button id="save">Save my reviewed profile</button></section>
+</div><section id="finished" class="hidden"><h2>Your profile is saved</h2><p>Next, build an editable search plan from your career preferences, fetch vacancies and rank matching roles.</p><a href="/search" class="button">Build my search</a> <a href="/">Open my queue</a></section>
+</main><script>
+const token='__TOKEN__';
+let draft=null, editSerial=0, savedSerial=0, persistPromise=null, saveTimer=null, confirming=false;
+const $=id=>document.getElementById(id);
+const identityLabels={full_name:'Full name',first_name:'First name (confirm explicitly)',last_name:'Last name (confirm explicitly)',email:'Email',phone:'Phone with country code',city:'Where you live: city',country:'Where you live: country'};
+const prefLabels={desired_work:'What do you want to spend your working day doing?',role_families:'Roles or job families you want to explore',career_change:'Are you changing career direction? What are you moving toward?',company_preferences:'Industries, company types or stages you prefer',city:'Preferred work city',country:'Preferred work country',work_arrangement:'Office, hybrid, remote, travel and relocation preferences',salary:'Desired pay, currency and whether it is a minimum or preference',experience_level:'Level of responsibility and experience requirements you want',avoid:'Roles, responsibilities or industries to avoid'};
+function notice(text){$('message').className='notice';$('message').textContent=text}
+async function api(path,body){
+  const options={headers:{'Content-Type':'application/json','X-JobLazy-Token':token}};
+  if(body!==undefined){options.method='POST';options.body=JSON.stringify(body)}
+  const r=await fetch(path,options),result=await r.json();
+  if(!r.ok)throw Error(result.error||'Could not complete this step.');return result;
+}
+function input(parent,id,label,value='',multiline=false){
+  const wrap=document.createElement('div'),l=document.createElement('label'),e=document.createElement(multiline?'textarea':'input');
+  l.htmlFor=id;l.textContent=label;e.id=id;e.value=value;wrap.append(l,e);parent.append(wrap);return e;
+}
+function markDirty(){
+  if(!draft||confirming)return;
+  editSerial++;$('confirmed').checked=false;$('draftStatus').textContent='Saving your draft…';
+  clearTimeout(saveTimer);saveTimer=setTimeout(()=>persist().catch(()=>{}),750);
+}
+function renderEntries(section){
+  const parent=$(section);parent.replaceChildren();
+  draft.proposal[section].forEach((entry,index)=>{
+    const box=document.createElement('div');box.className='entry';
+    Object.entries(entry).forEach(([key,value])=>{
+      if(key==='source_quote')return;
+      const e=input(box,section+'-'+index+'-'+key,key==='bullets'?'Responsibilities and achievements (one per line)':key,Array.isArray(value)?value.join('\n'):value,key==='bullets'||key==='description');
+      e.oninput=()=>entry[key]=key==='bullets'?e.value.split('\n').filter(s=>s.trim()):e.value;
+    });
+    if(entry.source_quote){
+      const d=document.createElement('details'),s=document.createElement('summary'),p=document.createElement('p');
+      s.textContent='Source excerpt';p.textContent=entry.source_quote;d.append(s,p);box.append(d);
+    }
+    const remove=document.createElement('button');remove.className='secondary';remove.textContent='Remove entry';
+    remove.onclick=()=>{draft.proposal[section].splice(index,1);renderEntries(section);markDirty()};box.append(remove);parent.append(box);
+  });
+}
+function showDraft(record){
+  draft=record;editSerial=savedSerial=0;
+  history.replaceState(null,'','/onboarding?draft='+encodeURIComponent(draft.id));
+  ['identity','questions','preferences','sources'].forEach(id=>$(id).replaceChildren());
+  Object.entries(identityLabels).forEach(([k,l])=>input($('identity'),'identity-'+k,l,draft.proposal.identity[k]));
+  $('summary').value=draft.proposal.summary;$('skills').value=draft.proposal.skills.join('\n');
+  ['experience','education','projects'].forEach(renderEntries);
+  draft.proposal.questions.forEach((q,i)=>input($('questions'),'answer-'+i,q.question+' — '+q.reason,(draft.additions||[]).find(a=>a.question===q.question)?.answer||'',true));
+  $('extra').value=(draft.additions||[]).filter(a=>a.question==='Additional experience').map(a=>a.answer).join('\n\n');
+  $('links').value=(draft.links||[]).join('\n');
+  Object.entries(prefLabels).forEach(([k,l])=>input($('preferences'),'pref-'+k,l,draft.preferences?.[k]||'',!['city','country'].includes(k)));
+  draft.sources.forEach(s=>{const h=document.createElement('h3'),p=document.createElement('pre');h.textContent=s.name;p.textContent=s.text;$('sources').append(h,p)});
+  $('uncertainties').textContent=draft.proposal.uncertainties.join('\n');
+  $('uncertainties').className=draft.proposal.uncertainties.length?'notice':'';
+  $('confirmed').checked=false;$('upload').classList.add('hidden');$('review').classList.remove('hidden');
+  $('draftStatus').textContent='Draft saved locally. Your profile is not confirmed yet.';
+}
+function formPayload(){
+  const p=structuredClone(draft.proposal);
+  Object.keys(identityLabels).forEach(k=>p.identity[k]=$('identity-'+k).value);
+  p.summary=$('summary').value;p.skills=$('skills').value.split('\n').filter(v=>v.trim());
+  const preferences=Object.fromEntries(Object.keys(prefLabels).map(k=>[k,$('pref-'+k).value]));
+  const additions=p.questions.flatMap((q,i)=>$('answer-'+i).value.trim()?[{question:q.question,answer:$('answer-'+i).value}]:[]);
+  if($('extra').value.trim())additions.push({question:'Additional experience',answer:$('extra').value});
+  return {id:draft.id,revision:draft.revision||0,profile:p,preferences,additions,links:$('links').value.split('\n').filter(v=>v.trim())};
+}
+async function persist(){
+  clearTimeout(saveTimer);
+  if(persistPromise){await persistPromise;if(editSerial>savedSerial)return persist();return}
+  if(!draft||editSerial===savedSerial)return;
+  persistPromise=(async()=>{
+    while(editSerial>savedSerial){
+      const serial=editSerial,result=await api('/api/onboarding/save',formPayload());
+      draft.revision=result.revision;savedSerial=serial;
+    }
+    $('draftStatus').textContent='Draft saved locally. You can close this page and resume later. Your profile is not confirmed yet.';
+  })();
+  try{await persistPromise}catch(e){$('draftStatus').textContent='Draft not saved. '+e.message;throw e}finally{persistPromise=null}
+}
+async function fileData(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve({name:file.name,content:String(reader.result).split(',')[1]});reader.onerror=()=>reject(Error('Could not read '+file.name));reader.readAsDataURL(file)})}
+$('connect').onclick=async()=>{try{notice((await api('/api/connect',{})).message)}catch(e){notice(e.message)}};
+$('extract').onclick=async()=>{
+  const cv=$('cv').files[0],support=[...$('support').files];
+  if(!cv)return notice('Choose your CV first.');if(support.length>4)return notice('Use at most four supporting documents.');
+  if([cv,...support].some(f=>f.size>8*1024*1024))return notice('Each file must be 8 MB or smaller.');
+  $('extract').disabled=true;notice('Extracting your draft. This may take a few minutes.');
+  try{showDraft(await api('/api/onboarding/draft',{files:await Promise.all([cv,...support].map(fileData))}));notice('Draft ready. Please review the facts and answer the questions that matter to you.')}
+  catch(e){notice(e.message)}finally{$('extract').disabled=false}
+};
+document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{
+  const section=b.dataset.add,templates={experience:{company:'',role:'',dates:'',location:'',bullets:[],source_quote:''},education:{org:'',title:'',year:'',source_quote:''},projects:{name:'',description:'',source_quote:''}};
+  draft.proposal[section].push(templates[section]);renderEntries(section);markDirty();
+});
+$('review').addEventListener('input',e=>{if(e.target.id!=='confirmed')markDirty()});
+$('saveDraft').onclick=async()=>{try{await persist()}catch(e){notice(e.message)}};
+window.addEventListener('beforeunload',e=>{if(editSerial>savedSerial){e.preventDefault();e.returnValue=''}});
+$('save').onclick=async()=>{
+  if(!$('confirmed').checked)return notice('Review your facts and tick the confirmation before saving.');
+  confirming=true;document.querySelectorAll('#review input,#review textarea,#review button').forEach(e=>e.disabled=true);
+  try{
+    await persist();await api('/api/onboarding/confirm',{...formPayload(),confirmed:true});
+    $('review').classList.add('hidden');$('finished').classList.remove('hidden');notice('Saved. Your original sources and confirmation remain private.');
+  }catch(e){notice(e.message)}finally{confirming=false;document.querySelectorAll('#review input,#review textarea,#review button').forEach(e=>e.disabled=false)}
+};
+async function resume(){
+  $('extract').disabled=true;
+  try{
+    const id=new URL(location.href).searchParams.get('draft');
+    const state=await api('/api/onboarding'+(id?'?draft='+encodeURIComponent(id):''));
+    if(state.profile_exists){$('upload').classList.add('hidden');$('finished').classList.remove('hidden');notice('Your profile is already saved. Open your search or queue to continue.')}
+    else if(state.draft){showDraft(state.draft);notice('Resumed your saved draft. Review it before confirming; no new model request was needed.')}
+  }catch(e){notice(e.message)}finally{$('extract').disabled=false}
+}
+resume();
+</script></body></html>

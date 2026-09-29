@@ -1,0 +1,24 @@
+<!doctype html><html><head><title>Fictional Teamtailor application</title>
+<style>.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)} #cookies{position:fixed;inset:0;background:white;z-index:20}</style></head><body>
+<h1>Partner Operations Associate</h1>
+<div id="cookies"><button data-action="click->common--cookies--alert#disableAll" onclick="this.parentElement.remove()">Decline all non-necessary cookies</button><button onclick="fetch('/unexpected-consent',{method:'POST'})">Accept all cookies</button></div>
+<button type="button" data-careersite--jobs--form-overlay-target="coverButton" data-action="click->careersite--jobs--form-overlay#showFormOverlay" onclick="document.querySelector('#overlay').hidden=false">Apply for this job</button>
+<form id="employee-login"><label>Employee email<input type="email" name="employee"></label><button>Log in</button></form>
+<section id="overlay" hidden><form id="job-application-form" data-controller="careersite--form" novalidate>
+<fieldset><legend><span>Gender Identity<sup data-asterisk="true">*</sup><span class="sr-only">Required</span></span><div>This is an optional disclosure with a required choice.</div></legend>
+<div data-controller="forms--inputs--choice">
+<input type="radio" id="gender-f" name="candidate[answers_attributes][0][choice]" value="1"><label for="gender-f">Female</label>
+<input type="radio" id="gender-m" name="candidate[answers_attributes][0][choice]" value="2"><label for="gender-m">Male</label>
+<input type="radio" id="gender-n" name="candidate[answers_attributes][0][choice]" value="4"><label for="gender-n">Prefer not to say</label></div></fieldset>
+<div><label for="candidate_first_name">First name<sup data-asterisk="true">*</sup><span class="sr-only">Required</span></label><input id="candidate_first_name" name="candidate[first_name]" autocomplete="given-name"></div>
+<div><label for="candidate_last_name">Last name<sup data-asterisk="true">*</sup><span class="sr-only">Required</span></label><input id="candidate_last_name" name="candidate[last_name]" autocomplete="family-name"></div>
+<div><label for="candidate_email">Email<sup data-asterisk="true">*</sup><span class="sr-only">Required</span></label><input type="email" id="candidate_email" name="candidate[email]"></div>
+<div><label for="candidate_phone">Phone<sup data-asterisk="true">*</sup><span class="sr-only">Required</span></label><input type="tel" id="candidate_phone" name="candidate[phone]"></div>
+<div><label for="candidate_resume_remote_url">Upload CV<sup data-asterisk="true">*</sup><span class="sr-only">Required</span></label><input type="file" id="candidate_resume_remote_url" name="resume"></div>
+<div><label for="letter">Cover letter</label><textarea id="letter" name="candidate[cover_letter]"></textarea></div>
+<div><input type="hidden" name="candidate[consent_given]" value="0"><input type="checkbox" id="candidate_consent_given" name="candidate[consent_given]" value="1"><label for="candidate_consent_given"><span class="sr-only">Required.</span>I agree to the application privacy policy.<sup data-asterisk="true">*</sup></label></div>
+<input type="submit" value="Submit application"></form><div role="status"></div></section>
+<script>document.querySelector('#job-application-form').onsubmit=async e=>{
+e.preventDefault();const r=await fetch('/submit'+location.pathname,{method:'POST',body:new FormData(e.target)});
+if(r.ok){e.target.remove();document.querySelector('[role=status]').textContent='Application received. Thank you for applying.';}
+};document.querySelector('#employee-login').onsubmit=e=>{e.preventDefault();fetch('/unexpected-login',{method:'POST'});};</script></body></html>

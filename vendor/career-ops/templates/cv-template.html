@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!-- career-ops-template
+name: Taj One Page
+version: 1.0.0
+-->
+<html lang="{{LANG}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{NAME}} | CV</title>
+<style>
+  :root {
+    --accent-color: #1b3a6b;
+    --font-family: Arial, "Liberation Sans", "Helvetica Neue", sans-serif;
+    --font-size: 12.67px;
+    --page-margin: 0.5in;
+  }
+  @page { margin: var(--page-margin); }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "clig" 0, "dlig" 0;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    line-height: 1.22;
+    color: #111;
+    background: #fff;
+  }
+  .page { width: 100%; max-width: {{PAGE_WIDTH}}; margin: 0 auto; }
+  .cv-photo { display: none; }
+
+  .header { text-align: center; margin-bottom: 12px; }
+  .header h1 {
+    font-family: var(--font-family);
+    font-size: 33.33px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #111;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .header-gradient { display: none; }
+  .contact-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0 7px;
+    font-family: var(--font-family);
+    font-size: 11.33px;
+    line-height: 1.2;
+    color: #111;
+  }
+  .contact-row a { color: #111; text-decoration: none; white-space: nowrap; }
+  .contact-row .separator { display: none; }
+  .contact-row > span:not(.separator) { order: 1; }
+  .contact-row > span:not(.separator)::after,
+  .contact-row a[href^="mailto:"]::after {
+    content: "";
+    display: inline-block;
+    width: 2.5px;
+    height: 2.5px;
+    border-radius: 50%;
+    background: currentColor;
+    margin-left: 7px;
+    vertical-align: middle;
+  }
+  .contact-row a[href^="mailto:"] { order: 2; }
+  .contact-row a[href*="linkedin.com"] { order: 3; }
+  .contact-row a[href^="tel:"],
+  .contact-row a:not([href^="mailto:"]):not([href*="linkedin.com"]):not([href^="tel:"]) {
+    display: none;
+  }
+
+  .section { margin-bottom: 10px; }
+  .section-title {
+    font-family: var(--font-family);
+    font-size: 13.33px;
+    line-height: 1.1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: #111;
+    border-bottom: 0.5px solid var(--accent-color);
+    padding-bottom: 2.5px;
+    margin: 13px 0 6px;
+  }
+  .summary-text { font-size: var(--font-size); line-height: 1.28; }
+  .section:has(.summary-text:empty) { display: none; }
+  .competencies-grid { display: flex; flex-wrap: wrap; gap: 3px 8px; }
+  .competency-tag { font-size: var(--font-size); color: #111; }
+  .competency-tag:not(:last-child)::after {
+    content: "";
+    display: inline-block;
+    width: 2.5px;
+    height: 2.5px;
+    border-radius: 50%;
+    background: #666;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .job {
+    display: grid;
+    grid-template-columns: auto minmax(120px, 1fr) auto auto;
+    grid-template-areas:
+      "company role period location"
+      "bullets bullets bullets bullets";
+    column-gap: 4px;
+    align-items: baseline;
+    margin: 0 0 7px;
+    break-inside: avoid;
+  }
+  .job-header { display: contents; }
+  .job-company {
+    grid-area: company;
+    font-family: var(--font-family);
+    font-size: 13.33px;
+    line-height: 1.15;
+    font-weight: 700;
+    color: #111;
+    white-space: nowrap;
+  }
+  .job-role {
+    grid-area: role;
+    font-size: 13.33px;
+    line-height: 1.15;
+    font-weight: 400;
+    color: #111;
+    min-width: 0;
+  }
+  .job-role::before { content: " | "; color: #555; }
+  .job-period {
+    grid-area: period;
+    font-size: 12px;
+    line-height: 1.15;
+    color: #111;
+    white-space: nowrap;
+  }
+  .job-period::before { content: " | "; color: #555; }
+  .job-location {
+    grid-area: location;
+    font-size: 12px;
+    line-height: 1.15;
+    color: #111;
+    white-space: nowrap;
+  }
+  .job-location::before { content: " | "; color: #555; }
+  .job ul {
+    grid-area: bullets;
+    margin: 3px 0 0 16px;
+    padding: 0;
+    list-style: none;
+  }
+  .job li {
+    position: relative;
+    font-size: 12.67px;
+    line-height: 1.22;
+    color: #111;
+    margin: 2.4px 0;
+    padding-left: 1px;
+  }
+  .job li::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 0.62em;
+    width: 7px;
+    border-top: 1px solid currentColor;
+  }
+  .job li strong { font-weight: 700; }
+
+  .project { margin: 0 0 4px; break-inside: avoid; }
+  .project-title {
+    display: inline;
+    font-family: var(--font-family);
+    font-size: 13.33px;
+    font-weight: 700;
+    color: #111;
+  }
+  .project-badge { font-size: 12px; font-weight: 400; color: #111; margin-left: 4px; }
+  .project-desc, .project-tech {
+    font-size: 12.67px;
+    line-height: 1.22;
+    margin: 3px 0 0 16px;
+  }
+  .project-desc, .edu-desc { position: relative; }
+  .project-desc::before, .edu-desc::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 0.62em;
+    width: 7px;
+    border-top: 1px solid currentColor;
+  }
+
+  .edu-item { margin: 0 0 7px; break-inside: avoid; }
+  .edu-header { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .edu-title { font-size: 13.33px; font-weight: 700; color: #111; }
+  .edu-org { font-weight: 400; }
+  .edu-org::before { content: " | "; color: #555; }
+  .edu-year { font-size: 12px; white-space: nowrap; color: #111; }
+  .edu-year::before { content: " | "; color: #555; }
+  .edu-desc { font-size: 12.67px; line-height: 1.22; margin: 3px 0 0 16px; }
+
+  .cert-table, .award-table, .skills-list { font-size: 12.67px; }
+  .cert-item, .award-item { margin-bottom: 4px; }
+  .skill-row { display: flex; gap: 5px; margin-bottom: 3px; }
+  .skill-category { font-weight: 700; }
+
+  a { white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="page">
+  {{PHOTO}}
+  <!-- HEADER -->
+  <div class="header">
+    <h1>{{NAME}}</h1>
+    <div class="header-gradient"></div>
+    <div class="contact-row">
+      <span>{{LOCATION}}</span>
+      <span class="separator">•</span>
+      <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>
+      <span class="separator">•</span>
+      <a href="{{LINKEDIN_URL}}">{{LINKEDIN_DISPLAY}}</a>
+      <span class="separator">•</span>
+      <a href="tel:{{PHONE}}">{{PHONE}}</a>
+      <span class="separator">•</span>
+      <a href="{{PORTFOLIO_URL}}">{{PORTFOLIO_DISPLAY}}</a>
+    </div>
+  </div>
+
+  <!-- PROFESSIONAL SUMMARY -->
+  <div class="section">
+    <div class="section-title">{{SECTION_SUMMARY}}</div>
+    <div class="summary-text">{{SUMMARY_TEXT}}</div>
+  </div>
+
+  <!-- CORE COMPETENCIES -->
+  <div class="section">
+    <div class="section-title">{{SECTION_COMPETENCIES}}</div>
+    <div class="competencies-grid">{{COMPETENCIES}}</div>
+  </div>
+
+  <!-- WORK EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">{{SECTION_EXPERIENCE}}</div>
+    {{EXPERIENCE}}
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">{{SECTION_EDUCATION}}</div>
+    {{EDUCATION}}
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">{{SECTION_PROJECTS}}</div>
+    {{PROJECTS}}
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="section">
+    <div class="section-title">{{SECTION_CERTIFICATIONS}}</div>
+    <div class="cert-table">{{CERTIFICATIONS}}</div>
+  </div>
+
+  <!-- AWARDS -->
+  <div class="section">
+    <div class="section-title">{{SECTION_AWARDS}}</div>
+    <div class="award-table">{{AWARDS}}</div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">{{SECTION_SKILLS}}</div>
+    {{SKILLS}}
+  </div>
+
+  <!-- END -->
+</div>
+</body>
+</html>

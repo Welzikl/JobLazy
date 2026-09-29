@@ -1,0 +1,55 @@
+<form><label>Full name<input name="name" required></label>
+<label>Email<input name="email" type="email" required></label>
+<div class="ashby-application-form-field-entry" data-field-path="_systemfield_resume">
+ <label for="_systemfield_resume" class="ashby-application-form-question-title">Resume</label>
+ <div class="ashby-application-form-input-file">
+  <input id="_systemfield_resume" type="file" required>
+  <div id="items"></div>
+  <button type="button" class="ashby-application-form-input-file-dropzone-upload">Upload File</button>
+ </div>
+</div><button type="submit">Submit Application</button></form><div id="notice"></div>
+<div role="status"></div><script>
+window.uploads=0;
+const picker=document.querySelector('input[type=file]');
+const replace=document.querySelector('.ashby-application-form-input-file-dropzone-upload');
+function preview(name, complete) {
+ const item=document.createElement('div');item.className='ashby-application-form-input-file-item';
+ const text=document.createElement('p');text.className='ashby-application-form-input-file-item-name';
+ text.textContent=name;item.append(text);
+ if(complete) {
+  const remove=document.createElement('button');remove.type='button';remove.title='Delete file';
+  remove.className='ashby-application-form-input-file-item-delete';item.append(remove);
+ }
+ document.querySelector('#items').replaceChildren(item);replace.textContent='Replace';
+ replace.disabled=!complete;
+}
+picker.onchange=async()=>{
+ window.uploads++;
+ if(window.mode==='wrong-bytes') {
+  const data=new DataTransfer();data.items.add(new File(['Different PDF bytes'],picker.files[0].name,{type:'application/pdf'}));
+  picker.files=data.files;
+ }
+ const file=picker.files[0];
+ if(window.mode==='filelist-only')return;
+ preview(file.name,false);
+ if(window.mode==='pending')return;
+ const body=new FormData();body.append('file',file);
+ const response=await fetch('/upload'+location.pathname,{method:'POST',body});
+ if(!response.ok) {
+  document.querySelector('#notice').textContent=file.name+' failed to upload';
+  replace.disabled=false;return;
+ }
+ setTimeout(()=>{
+  if(window.mode==='removed') {
+   picker.value='';document.querySelector('#items').replaceChildren();
+   replace.disabled=false;replace.textContent='Upload File';return;
+  }
+  preview(window.mode==='wrong-name'?'different.pdf':file.name,true);
+ },450);
+};
+if(window.mode==='existing')preview('previous-unverified.pdf',true);
+document.querySelector('form').onsubmit=async e=>{
+ e.preventDefault();const body=new FormData(e.target);body.append('resume',picker.files[0]);
+ await fetch('/submit'+location.pathname,{method:'POST',body});
+ e.target.remove();document.querySelector('[role=status]').textContent='Application received.';
+};</script>

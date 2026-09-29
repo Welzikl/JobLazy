@@ -1,0 +1,26 @@
+name: Test JobLazy
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m playwright install --with-deps chrome
+      - run: python scripts/check-public.py
+      - run: python scripts/verify-vendor.py
+      - run: python -m unittest discover -s tests -t . -v
+        env:
+          JOBLAZY_TEST_BROWSER_CHANNEL: chrome

@@ -1,0 +1,29 @@
+{
+  "example_only": true,
+  "minimum_score": 70,
+  "search_location": {"city":"London", "country":"United Kingdom"},
+  "targeting": {
+    "location": "London-based roles only",
+    "primary_tracks": ["strategy and operations", "business operations", "growth", "commercial strategy", "strategic partnerships"],
+    "secondary_tracks": ["product operations", "founder associate", "technology BDR/SDR", "technology and AI consulting"],
+    "company_priority": "Technology companies",
+    "salary_filter": null,
+    "title_or_years_filter": null,
+    "exclusions": ["banking", "accounting", "HR and training", "hospitality"]
+  },
+  "applicant": {
+    "identity": {"full_name":"Alex Example", "first_name":"Alex", "last_name":"Example", "email":"alex@example.test", "phone":"+442079460000"},
+    "address": {"city":"London", "country":"United Kingdom"},
+    "links": {"linkedin":"https://www.linkedin.com/in/example"}
+  },
+  "answers": [],
+  "facts": [],
+  "resume": {
+    "candidate": {"name":"Alex Example", "email":"alex@example.test", "phone":"+442079460000", "location":"London"},
+    "page_format":"a4",
+    "summary":"Operations specialist with experience improving partner onboarding.",
+    "experience":[{"company":"Fictional Software Ltd", "role":"Operations Associate", "dates":"2023–2025", "location":"London", "bullets":["Coordinated onboarding for 20 partners.", "Built weekly reporting used by the partnerships team.", "Reduced onboarding handoff delays by 15% through a shared checklist."]}],
+    "education":[{"org":"Example University", "title":"BA Business", "year":"2023"}],
+    "skills":[], "projects":[], "competencies":[], "certifications":[], "awards":[]
+  }
+}
