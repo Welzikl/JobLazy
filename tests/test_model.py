@@ -199,7 +199,7 @@ class ModelTests(unittest.TestCase):
                      {'a':values[0],'b':values[1],'c':3,'d':values[1]}):
             self.assertEqual(jsonschema.Draft202012Validator(schema).is_valid(data),jsonschema.Draft202012Validator(shared).is_valid(data))
 
-    def test_transport_uses_shared_schema_and_keeps_existing_cache_identity(self):
+    def test_transport_uses_shared_schema_but_does_not_replay_pre_policy_cache(self):
         enum={'type':'string','enum':[f'fictional.source.{i}' for i in range(50)]}
         schema=obj({'a':enum,'b':copy.deepcopy(enum)});value={'a':enum['enum'][0],'b':enum['enum'][1]}
         def transport(args,**kwargs):
@@ -213,8 +213,12 @@ class ModelTests(unittest.TestCase):
             legacy_key=digest({'task':'test','data':data,'schema':schema,'model':model.model,'version':2,
                 'compact':True,'instructions':digest((ROOT/'joblazy/worker-instructions.md').read_bytes())})
             write_json(Path(temp)/(legacy_key+'.json'),value)
+            with patch('joblazy.model.subprocess.run',side_effect=transport) as run:
+                self.assertEqual(model.generate('test',data,schema),value)
+                self.assertEqual(run.call_count,2)
             with patch('joblazy.model.subprocess.run') as run:
-                self.assertEqual(model.generate('test',data,schema),value);run.assert_not_called()
+                self.assertEqual(model.generate('test',data,schema),value)
+                run.assert_not_called()
             with patch('joblazy.model.subprocess.run',side_effect=transport):
                 self.assertEqual(model.generate('new task',data,schema),value)
             meta=next(Path(temp).glob('*.meta.json'))

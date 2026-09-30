@@ -8,7 +8,7 @@
 - SHA-256: `b7704609e308c3737e1d63452898cddf7a87cdfeb9b3f795847aaa82013ad450`.
 - Tested source/tag: `b8ec944b5c3971e27ed6671fbeb3eed83c18bfb8` / `v0.1.0-rc.2`.
 - Uploaded to GitHub, downloaded through the signed-in browser, and checked: SHA-256 matches the tested ZIP.
-- Later changes on `main` improve documentation only; the release ZIP and source tag remain unchanged. Older status text inside the frozen ZIP predates final verification; use this page and the companion release report for final results.
+- The release ZIP and source tag remain unchanged. `main` now also includes the 30 September agent-rules update described below. Older status text inside the frozen ZIP predates final verification; use this page and the companion release report for final results.
 
 ## Windows verification
 
@@ -35,3 +35,11 @@ Check [GitHub Actions](https://github.com/Welzikl/JobLazy/actions) for later res
 Final Submit remains manual. Employer forms vary; scanned CVs need readable text; supporting-link content attribution is unfinished. Employer replies and LinkedIn outreach are outside this release. Review every generated CV and employer field.
 
 [Full release verification report](RELEASE-VERIFICATION.md) · [Features](FEATURES.md) · [Windows help](WINDOWS-QUICKSTART.md) · [Usage](ECONOMICAL-USAGE.md)
+
+## Agent-rules update on main — 30 September 2026
+
+Repository guidance now covers direct CV edits and candidate-specific preferences. Every runtime model mode loads the shared rules and its worker instructions; their combined digest invalidates old cache entries. Missing, empty or unreadable rules stop calls before cache replay or model-budget reservation. Noncompact mode also retains the shell, app and web-search restrictions. The release builder requires all three runtime rule files.
+
+All 38 focused model, rules, preset, onboarding, employment-title, authorship and release checks passed in a disposable source extraction, with the manifest and required rule files verified. These are fixture/mocked checks, not a new live-model trial or full-suite certification. The earlier 539-test result applies to the frozen rc.2 download, not this changed runtime. Existing downloaded ZIPs do not gain this update automatically.
+
+See [agent rules](AGENT-RULES.md) for the policy files and enforcement boundaries.
