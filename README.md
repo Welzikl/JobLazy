@@ -1,3 +1,22 @@
+# JobLazy in Codex or Claude Code
+
+Use the same job-search workflow directly in your agent chat: confirm your CV and preferences, find verified roles, assess fit, review a tailored CV, prepare applications and keep one opportunity tracker.
+
+**Get started:** download the current repository as a ZIP (GitHub **Code > Download ZIP**) or use the accompanying rc.3 package, extract it into a new folder, then open that folder in Codex or Claude Code. This repository is private, so GitHub downloads require access. The older rc.2 release download does not contain chat mode.
+
+Paste this into your agent:
+
+> Use JobLazy in this chat. Read skills/joblazy/SKILL.md, check the setup, and help me get started with my own CV and job preferences.
+
+Codex supports `$joblazy`; Claude Code supports `/joblazy`. If the shortcut is not discovered, the prompt above works. The agent uses its current model/account and handles local setup and helper commands. **No second AI login is required for chat mode.** Python 3.12+, Node.js 22+ and Edge/Chrome are needed by the local document/browser helpers. Final employer Submit remains yours.
+
+[Chat setup and workflow](docs/AGENT-QUICKSTART.md) · [Start Here](START%20HERE.txt) · [Verification](docs/AGENT-VERIFICATION.md)
+
+The existing evidence checks, renderer, browser preparation and SQLite tracker are reused; this is not a replacement CV generator. Live web research depends on the host agent's tools. Nick's account and hardware and Claude Code's live execution have not been tested on this development PC.
+
+<details>
+<summary>Optional original Codex-backed dashboard and its earlier rc.2 download</summary>
+
 <p align="center">
   <img src="docs/screenshots/cover.svg" alt="JobLazy. Find your next move. Start with your CV, explore your shortlist, review then apply." width="100%">
 </p>
@@ -132,3 +151,5 @@ This Python app runs locally. GitHub hosts its documentation and downloads; GitH
 ---
 
 [MIT License](LICENSE) · [Third-party acknowledgements](THIRD_PARTY.md)
+
+</details>

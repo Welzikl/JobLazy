@@ -1,4 +1,4 @@
-param([string]$PythonExecutable)
+param([string]$PythonExecutable, [switch]$AgentMode)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $projectRoot
@@ -20,9 +20,12 @@ try {
     }
     & $venvPython -m pip --isolated install --disable-pip-version-check --no-input -r (Join-Path $projectRoot 'requirements.lock.txt')
     if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed. Check your internet connection, then run Setup.cmd again.' }
-    & $venvPython (Join-Path $PSScriptRoot 'preflight.py')
+    $preflightArguments = @((Join-Path $PSScriptRoot 'preflight.py'))
+    if ($AgentMode) { $preflightArguments += '--agent' }
+    & $venvPython @preflightArguments
     if ($LASTEXITCODE -ne 0) { throw 'Complete the missing prerequisites listed above, then run Setup.cmd again.' }
-    Write-Host 'Ready. Start JobLazy.cmd always selects the Luna-only friend preset.'
+    if ($AgentMode) { Write-Host 'Ready. Continue in your Codex or Claude Code chat with the JobLazy skill.' }
+    else { Write-Host 'Ready. Start JobLazy.cmd always selects the Luna-only friend preset.' }
 } catch {
     Write-Host $_.Exception.Message -ForegroundColor Red
     exit 1

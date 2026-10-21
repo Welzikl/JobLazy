@@ -1,3 +1,11 @@
+# Current development candidate - 21 October 2026
+
+Version 0.1.0-rc.3 adds direct Codex/Claude Code chat operation. Read [chat setup](AGENT-QUICKSTART.md) and [current verification](AGENT-VERIFICATION.md). The older rc.2 GitHub release is unchanged and does not contain chat mode.
+
+All 546 regression tests passed in 405.048 seconds from a clean Windows extraction with freshly installed dependencies. Agent-mode setup, the host-chat intake exchange, source/privacy audit and vendor verification passed. This is local/fictional evidence; Nick's machine/account and live Claude Code operation remain untested.
+
+The following is preserved historical evidence for the earlier published dashboard release; it does not certify rc.3.
+
 # Current verification — 29 September 2026
 
 [JobLazy 0.1.0-rc.2](https://github.com/Welzikl/JobLazy/releases/tag/v0.1.0-rc.2) is published as a private Windows prerelease for friend testing.

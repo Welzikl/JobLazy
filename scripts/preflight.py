@@ -21,7 +21,7 @@ def installed_browser():
     return None
 
 
-def check():
+def check(agent=False):
     errors, warnings = [], []
     if sys.version_info < (3, 12): errors.append('Install Python 3.12 or later, then rerun Setup.cmd.')
     for package in ('playwright', 'jsonschema', 'pypdf', 'PyYAML', 'phonenumberslite'):
@@ -40,7 +40,7 @@ def check():
     browser = installed_browser()
     if not browser: errors.append('Install Microsoft Edge or Google Chrome, then retry.')
     signed_in = False
-    if not any('Missing dependency' in error for error in errors):
+    if not agent and not any('Missing dependency' in error for error in errors):
         from joblazy.model import CodexModel
         model = CodexModel(ROOT/'runtime/model-cache', model='gpt-6-luna')
         if not model.executable:
@@ -48,15 +48,17 @@ def check():
         else:
             signed_in = bool(model.status()['available'])
             if not signed_in: warnings.append('Codex needs sign-in. Use Connect Codex in JobLazy; no API key is required.')
-    warnings.append('Sign-in does not prove Luna access or remaining allowance. The first bounded operation checks actual inference.')
+    warnings.append('Use the current Codex or Claude Code chat to answer JobLazy requests. No second AI login is checked.' if agent else
+                    'Sign-in does not prove Luna access or remaining allowance. The first bounded operation checks actual inference.')
     return {'ok': not errors, 'python': '.'.join(map(str,sys.version_info[:3])), 'node': node_version,
-            'browser': browser, 'preset': 'friend', 'model': 'gpt-6-luna', 'signed_in': signed_in,
+            'browser': browser, 'preset': 'agent' if agent else 'friend', 'model': 'current-agent-chat' if agent else 'gpt-6-luna', 'signed_in': None if agent else signed_in,
             'errors': errors, 'warnings': warnings}
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__); parser.add_argument('--json', action='store_true')
-    args = parser.parse_args(); report = check()
+    parser.add_argument('--agent', action='store_true', help='Use this coding-agent chat; do not require Codex CLI')
+    args = parser.parse_args(); report = check(agent=args.agent)
     if args.json: print(json.dumps(report))
     else:
         print('JobLazy prerequisite check: '+('ready' if report['ok'] else 'needs attention'))

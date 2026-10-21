@@ -12,8 +12,9 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = {'.gitattributes', '.gitignore', 'AGENTS.md', 'LICENSE', 'README.md',
               'THIRD_PARTY.md', 'VERSION', 'Setup.cmd', 'Start JobLazy.cmd',
-              'requirements.txt', 'requirements.lock.txt'}
-SOURCE_DIRS = {'.github', 'docs', 'examples', 'joblazy', 'scripts', 'tests', 'vendor'}
+              'requirements.txt', 'requirements.lock.txt', 'CLAUDE.md', 'START HERE.txt'}
+SOURCE_DIRS = {'.github', 'docs', 'examples', 'joblazy', 'scripts', 'tests', 'vendor', 'skills'}
+AGENT_FILES = {'.agents/skills/joblazy/SKILL.md', '.claude/skills/joblazy/SKILL.md'}
 EXCLUDED = {'docs/STATUS-HISTORY-2026-09-14.md'}
 REQUIRED_RULE_FILES = {'joblazy/runtime-rules.md', 'joblazy/worker-instructions.md',
                        'joblazy/search-worker-instructions.md'}
@@ -44,14 +45,14 @@ def build(output):
     inventory = subprocess.run(git+['ls-files', '--cached', '--others', '--exclude-standard', '-z'],
                                cwd=ROOT, capture_output=True, check=True)
     paths = sorted(set(inventory.stdout.decode('utf-8').split('\0'))-{''}-EXCLUDED)
-    if not (ROOT_FILES | REQUIRED_RULE_FILES).issubset(paths):
+    if not (ROOT_FILES | REQUIRED_RULE_FILES | AGENT_FILES).issubset(paths):
         raise ValueError('Required release files are missing from the source inventory')
     with tempfile.TemporaryDirectory(prefix='joblazy-release-') as temp:
         export = Path(temp)
         entries = []
         for name in paths:
             relative = Path(name)
-            if name not in ROOT_FILES and relative.parts[0] not in SOURCE_DIRS:
+            if name not in ROOT_FILES | AGENT_FILES and relative.parts[0] not in SOURCE_DIRS:
                 raise ValueError(f'Unexpected source path needs review: {name}')
             source = ROOT/relative
             if source.is_symlink() or not source.resolve().is_relative_to(ROOT):

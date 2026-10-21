@@ -8,3 +8,6 @@ node_modules/
 *.sqlite*
 
 .hermes/
+.claude/settings.local.json
+.claude/CLAUDE.local.md
+.claude/worktrees/

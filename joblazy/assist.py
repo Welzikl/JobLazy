@@ -183,7 +183,7 @@ def prepare_assisted(store,key,profile,model,context,data,*,prompt=operator_prom
                 emit('Browser cleanup is pending; keep this session open while reviewing the application.')
 
 
-def run_assisted(data,key,profile_path,model_name='gpt-5.6-terra',browser_channel='chrome',*,ui_session=False,reviewed_cv_sha256=None):
+def run_assisted(data,key,profile_path,model_name='gpt-5.6-terra',browser_channel='chrome',*,ui_session=False,reviewed_cv_sha256=None,host_agent=False):
     from playwright.sync_api import sync_playwright
     from .model import CodexModel
     from .store import Store
@@ -201,7 +201,14 @@ def run_assisted(data,key,profile_path,model_name='gpt-5.6-terra',browser_channe
         session_error=None
         try:
             from .limits import account_model
-            model=account_model(data,store,model_name)
+            if host_agent:
+                from .agent import AgentModel
+                from .limits import DAILY_REQUESTS
+                from datetime import datetime, timezone
+                model=AgentModel(data/'agent-exchange',before_request=lambda:store.reserve_model_request(
+                    datetime.now(timezone.utc).date().isoformat(),DAILY_REQUESTS))
+            else:
+                model=account_model(data,store,model_name)
             page,status=prepare_assisted(store,key,profile,model,context,data,prompt=prompt,
                                         reviewed_cv_sha256=reviewed_cv_sha256,profile_path=profile_path)
             render_review(store,data,profile=profile)

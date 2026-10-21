@@ -1,0 +1,28 @@
+JOBLAZY - USE IT IN CODEX OR CLAUDE CODE
+
+1. Extract this whole ZIP into a new folder on your Windows PC.
+2. Open that folder as a local project in Codex or Claude Code.
+3. Paste this:
+
+Use JobLazy in this chat. Read skills/joblazy/SKILL.md, check the setup,
+and help me get started with my own CV and job preferences. Use my current
+agent account. Find and verify suitable jobs, tailor factual CVs, prepare
+applications for my review, and keep my opportunity tracker updated.
+
+Codex shortcut: $joblazy
+Claude Code shortcut: /joblazy
+If the shortcut is not listed, the paste above works without installing a skill.
+
+Your agent handles the helper commands. It may need Python 3.12+, Node.js 22+
+and Edge or Chrome for document generation and browser preparation. It will
+explain any missing prerequisite. You use your own current AI account; no
+developer credentials, CV or application history are included.
+
+First confirm your CV facts and preferences in chat. Review generated CVs
+before use. Review employer forms yourself; the final Submit is yours.
+
+The chat mode does not need Setup.cmd or Start JobLazy.cmd. Those launch the
+optional older dashboard, which uses Codex CLI separately.
+
+Detailed agent instructions: docs/AGENT-QUICKSTART.md
+This is an early-access package. Employer forms and account access vary.
