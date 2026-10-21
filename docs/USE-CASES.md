@@ -14,13 +14,17 @@ This is the work behind the project: finding opportunities, preparing them caref
 
 **Keep:** the untouched original, a confirmed profile, targeting preferences and unanswered questions. A new user starts from their own evidence; they do not inherit the developer's career history or preferences.
 
-## 2. Search broadly, then check the actual role
+## 2. Search broadly, then rate the actual role
 
 > “Find relevant jobs, including ones I might miss by searching only my current title.”
 
 **Built-in source readers and assessment; host-assisted web discovery in chat.** Our search work combined target roles, adjacent responsibilities, employers, ATS boards, sector themes and a gap-filling pass. Open the employer posting, capture its description and source, remove duplicates, and explain why a role is relevant.
 
 **Keep:** a source-backed shortlist with fit reasons, uncertainties and inaccessible sources clearly identified. A search-result snippet or an old saved URL is not enough to say a vacancy is open. Search coverage and quality still need judgment.
+
+> “Now rate these jobs. Which are strong matches, worthwhile stretches or poor fits?”
+
+**The original rating system stays central:** each full assessment has an overall score out of 100 and five ratings for CV fit, career direction, compensation, culture/working conditions and red flags. Each dimension is 1–5 or Unknown, with supporting evidence and an explanation. Compare those ratings, requirement gaps and eligibility before choosing a role. The overall score is a holistic judgment, not a hiring probability or arithmetic average. [How ratings and the selection cutoff work](../README.md#job-ratings-decide-what-is-worth-your-time).
 
 ## 3. Make a different CV for a different opportunity
 

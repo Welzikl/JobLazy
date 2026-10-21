@@ -53,6 +53,8 @@ Search with the host's web tools following the skill's six complementary passes.
 
 Service requests during `run`. The existing pipeline reopens the posting to check current availability before assessment. It uses the saved targeting rules, citations, hard constraints and existing rejection criteria. A blocked posting is a retrieval limitation, not evidence of poor fit.
 
+After a full assessment, read `runtime/applications/ROLE_ID/ranking.json` and show the job rating in chat: overall **0–100**, **Strong match / Worthwhile stretch / Poor fit**, eligibility, and the five **1–5 or Unknown** dimensions (CV fit, career direction, compensation, culture/working conditions, red flags). Include evidence, explanations and gaps. The overall score is holistic, not an average or hiring probability; a high red-flags rating means fewer observed concerns. Missing evidence stays Unknown. Use the saved result, not a new guessed score. The default profile selection cutoff is 70/100; an explicit below-cutoff choice cannot bypass known hard constraints or Poor fit. Search leads without a full assessment remain unassessed. [User-facing rating explanation](../README.md#job-ratings-decide-what-is-worth-your-time).
+
 For a user-selected role, record their exact choice and create the CV:
 
 ```powershell

@@ -5,11 +5,12 @@
 <p align="center">
   <strong>A job-search workspace for Codex and Claude Code.</strong><br>
   Bring your CV. Tell the agent what you want next.<br>
-  Work through real opportunities, tailored CVs and applications together.
+  Find and rate opportunities, then prepare tailored CVs and applications together.
 </p>
 
 <p align="center">
   <a href="#start-in-three-steps">Get started</a> ·
+  <a href="#job-ratings-decide-what-is-worth-your-time">Job ratings</a> ·
   <a href="#what-weve-actually-been-doing">Real use cases</a> ·
   <a href="docs/USE-CASES.md">Example conversations</a> ·
   <a href="docs/AGENT-VERIFICATION.md">What has been tested</a>
@@ -25,6 +26,28 @@ It grew out of a real job search. We kept needing more than a rewritten CV: the 
 
 **You review your facts and documents. You make the final employer submission.**
 
+## Job ratings: decide what is worth your time
+
+**The original Career Ops rating system is a core part of JobLazy.** A full job assessment gives you an **overall fit score out of 100**, a **Strong match / Worthwhile stretch / Poor fit** judgment, and the evidence behind it—before you spend time tailoring an application.
+
+The same assessment includes five separate ratings, each **1–5** or **Unknown** when the evidence is missing:
+
+| Rating | What it tells you |
+| --- | --- |
+| **CV fit** | How your confirmed experience matches the work and requirements. |
+| **Career direction** | Whether the role moves you toward the work you actually want next—your North Star. |
+| **Compensation** | How advertised pay compares with your saved expectations. Unadvertised pay stays unknown. |
+| **Culture and working conditions** | What the posting says about working arrangements and your preferences. These are posting signals, not verified inside knowledge. |
+| **Red flags** | Concerns supported by the posting. A higher rating means fewer observed concerns; it is not a guarantee that an employer is legitimate. |
+
+Higher ratings are more favorable. **The overall score is a holistic judgment, not an average of the five ratings or a percentage chance of getting hired.** Each scored dimension needs posting evidence; CV fit and career direction also need candidate evidence. Unknown information is shown openly rather than given an invented neutral score.
+
+Ask: **“Rate these jobs against my profile. Show the overall score, all five ratings, the strongest reasons, the gaps and any eligibility blockers.”** Chat should show the saved assessment, so you can compare opportunities and decide which to pursue.
+
+The default selection cutoff is **70/100**, configurable in your profile. You can explicitly choose a worthwhile stretch below that cutoff. A high score or a decision to pursue does **not** bypass a known hard constraint or a Poor fit classification. Unverified eligibility stays uncertain; a blocked page or a role awaiting assessment does not get a made-up score.
+
+Ratings and their supporting evidence are saved with the role. The tracker export includes the overall score and reason; the full five-dimension breakdown remains in the saved assessment/review. [See the assessment implementation](joblazy/materials.py) and [rating regression tests](tests/test_rubric.py).
+
 ## What a session looks like
 
 These prompts illustrate the workflow; they are not a transcript or a claim of automatic results.
@@ -33,7 +56,7 @@ These prompts illustrate the workflow; they are not a transcript or a claim of a
 | --- | --- | --- |
 | “Here's my CV. I want to move into commercial roles.” | Read the CV, surface missing details and confirm your experience, target work and location. | Your original CV and a separate confirmed profile. |
 | “Find jobs that actually fit me.” | Search complementary sources, open employer postings, check relevance and remove duplicates. | Source links, saved job descriptions and a shortlist with reasons and gaps. |
-| “Is this one worth applying for?” | Assess the full role against your evidence and preferences. | A role-specific assessment that distinguishes strengths from uncertainties. |
+| “Is this one worth applying for?” | Rate the full role against your evidence and preferences. | A score out of 100, five dimension ratings, fit category, reasons, gaps and eligibility status. |
 | “Tailor my CV for this role.” | Select relevant confirmed experience, draft with the existing template and check claims and layout. | A role-specific PDF for you to review. |
 | “Help me apply.” | Use the reviewed PDF and confirmed answers to prepare supported employer forms; ask about missing answers. | Prepared materials, a browser handoff and a record of what was actually done. |
 | “What have I applied to, and what's next?” | Read saved job states and recorded outcomes; export the same tracker for Excel. | One opportunity history and a CSV snapshot. |
@@ -46,6 +69,7 @@ The examples below come from earlier career-work sessions. They are anonymized: 
 ### Find and prepare the right opportunities
 
 - **Search beyond one job board.** Combine target titles, adjacent responsibilities, employer sites and public ATS postings, then check the actual job description. Keep inaccessible leads separate from verified roles.
+- **Rate jobs before investing in applications.** Use the original five-dimension rubric and overall score to compare opportunities, understand tradeoffs and choose a strong match or worthwhile stretch.
 - **Make different CVs for different roles.** Prepare role-specific versions for commercial, partnerships, business-development and revenue-operations opportunities. Select relevant evidence instead of sending one generic document everywhere.
 - **Revise a CV without losing the good parts.** Change a summary, emphasis or approved title while preserving the selected template, source facts and previous versions.
 - **Prepare the application around the exact document.** Review the PDF, use that version for the form, and answer missing questions from confirmed information.
@@ -97,7 +121,7 @@ Codex's skill entrypoint is `$joblazy`; Claude Code's is `/joblazy`. If your hos
 flowchart LR
     A[Your CV + preferences] --> B[Confirm your profile]
     B --> C[Find + verify roles]
-    C --> D[Assess + choose]
+    C --> D[Rate jobs + choose]
     D --> E[Tailor + review CV]
     E --> F[Prepare supported forms]
     F --> G[You submit + record outcome]
