@@ -1,39 +1,40 @@
-# JobLazy feature inventory
+# JobLazy capabilities
 
-Reviewed 29 September 2026 against the friend-test candidate. Implementation and fixture evidence do not establish reliability on every employer site.
+Reviewed 21 October 2026 for 0.1.0-rc.3. Start with the [main page](../README.md) or [use-case casebook](USE-CASES.md). This inventory describes the implementation; it does not certify broad live-site reliability.
 
-| Feature | Current behavior | Evidence or limitation |
+## Ways to use it
+
+| Mode | How it works | Requirements and evidence |
 | --- | --- | --- |
-| Windows setup and launch | Setup.cmd installs pinned dependencies; Start JobLazy.cmd detects Edge/Chrome and always selects the friend preset. | Fresh-directory setup and launcher smoke passed on the development Windows host. Exact ZIP verification remains a release gate. |
-| Luna-only friend preset | Luna handles intake, planning, six scouts, both assessment stages, materials and preparation/resume. No model fallback. | Routing checked in connected fixtures. Original personal Luna/Astra/Terra preset preserved. |
-| CV intake | PDF, DOCX and text extraction produces an editable draft with follow-ups and explicit confirmation. | Browser regression; scanned documents require readable text. |
-| Resumable onboarding and profile correction | Drafts autosave; revisions reject stale updates. Confirmed facts, user edits and undisplayed canonical fields are preserved. | Connected and profile-preservation regression coverage. Portfolio content attribution remains unfinished. |
-| Future-work preferences | Desired direction, location, work arrangement, level and exclusions are separate from career evidence. | New profiles do not inherit the developer's employer list. Live career-change usefulness remains unproven. |
-| Search plan | User reviews and saves title phrases and source choices before searching. | Browser flow covered. |
-| Six Luna search missions | Every new delegated web search starts six complementary missions with at most three concurrent model workers. | Six dispatches asserted in the joined journey. Explicit interrupted-run resume reuses completed missions. Feed-only actions are distinct. |
-| Direct ATS and feeds | Ashby, Greenhouse and Lever public posting reads, verified board registry, bounded expansion, supplementary public feeds and failure reporting. | Partial market coverage. Source access and relevance vary. |
-| Deduplication and caching | Exact identities/verified aliases, title/location filtering, source caches and evidence-bound review reuse. | Regression coverage; saved records are not automatically fresh vacancies. |
-| Preliminary shortlist | Compact Luna batch review with reasons, posting evidence and caveats. | Separate from a full assessment. Live Luna-only quality and latency need measurement. |
-| Selected-role assessment | A visible action selects the role and requests a full grounded fit assessment. | Connected fictional journey passes; valid complete assessments can be reused. |
-| Tailored CV review | Materials generated only for selected roles, validated against confirmed facts, opened as a PDF and confirmed by exact hash. | Connected fixture verifies the same reviewed file reaches the form. |
-| Assisted preparation | Visible employer browser fills supported confirmed fields and attaches the reviewed CV. | Fictional form passes. Final Submit stays manual; broad real-site reliability unproven. |
-| Questions and live resume | Application screen saves explicitly confirmed answers and resumes only its current live browser session. | Fixture verifies the answer reached the form and the original attachment remained. Stale/duplicate commands rejected. |
-| Outcomes and history | UI records submitted/not-submitted/uncertain with a note. Uncertainty protects against automatic retry. | Regression coverage; a local record alone is not employer acceptance. |
-| Tracker | CSV export of durable jobs, states, reasons and recorded outcomes. | No employer-email synchronization. |
-| Shared allowances | Central 25-processing-attempt ceiling and 50 uncached model-request reservations per UTC day, including assist/resume. | Atomic reservation and boundary tests. Account capacity is separate and unknown. |
-| Local UI protection | Loopback binding, local token, Host/Origin checks and verified CV serving. | Focused regression coverage; not a general security certification. |
-| Release controls | Source/private-data audit, vendor hashes and licenses, versioned packaging work and Windows/Ubuntu CI configuration. | Exact candidate extraction, live checks and publication remain acceptance gates. |
+| Codex chat | The shared skill operates the existing local pipeline through `AgentModel`, using the current chat for model responses. | Local helpers and host web/browser tools. A fictional intake exchange was exercised in a real Codex chat. |
+| Claude Code chat | The Claude skill entrypoint reads the same shared workflow and uses the same bridge. | No Codex inference subprocess or second login in chat mode. A live Claude Code session is untested. |
+| Optional dashboard | A local browser UI uses the existing Codex CLI backend and configurable model; the Windows friend launcher uses its Luna preset. | Separate Codex setup. Historical live/fixture evidence is in [STATUS.md](STATUS.md). |
 
-## Outside this milestone
+## Built-in workflow
 
-Employer email replies and LinkedIn contact discovery/outreach are deferred. Automatic employer submission is not provided. No promise of 25 completed applications per day or proven all-day unattended operation is made.
+| Capability | What it does | Implementation / practical limit |
+| --- | --- | --- |
+| CV intake and confirmation | Extract PDF, DOCX or text into a draft, ask follow-ups and save a confirmed profile. | [onboarding.py](../joblazy/onboarding.py); readable source text required. |
+| Preferences and corrections | Keep desired work/location separate from career evidence; preserve confirmed facts during profile edits. | [profile_edit.py](../joblazy/profile_edit.py); new users supply their own facts and preferences. |
+| Discovery | Read supported public ATS postings and feeds. Chat uses its available web tools for six complementary search passes. | [search.py](../joblazy/search.py), [ATS reader](../joblazy/ats_postings.py), [shared skill](../skills/joblazy/SKILL.md); partial market coverage. |
+| Dashboard search orchestration | Review a search plan; run six complementary model missions with at most three concurrent workers. | [search_coordinator.py](../joblazy/search_coordinator.py), [search_missions.py](../joblazy/search_missions.py); chat mode does not require six agents or a named model. |
+| Deduplication and saved results | Use posting identities, verified aliases, source caches and evidence-bound response reuse. | [store.py](../joblazy/store.py), [search.py](../joblazy/search.py); saved vacancies still need freshness checks. |
+| Shortlisting and full assessment | Dashboard has a preliminary batch shortlist. Full selected-role assessment uses source evidence, preferences and constraints; chat reaches it through the bridge. | [shortlist_review.py](../joblazy/shortlist_review.py), [pipeline.py](../joblazy/pipeline.py); preliminary relevance is not a full assessment. |
+| Tailored CVs | Generate for chosen roles, check claims, render the existing template and validate the PDF. | [materials.py](../joblazy/materials.py); user and visual review remain necessary. |
+| Exact-file review | Bind review and preparation to the CV artifact's SHA-256. | [checkpoints.py](../joblazy/checkpoints.py); changed files need fresh review. |
+| Assisted form preparation | Fill supported confirmed fields and attach the reviewed CV in a visible browser. | [assist.py](../joblazy/assist.py); host must keep the interactive browser/process alive. Final Submit is manual. |
+| Answers and continuation | Save explicit answers and resume the current live form session. | [assist_bridge.py](../joblazy/assist_bridge.py), [application_ui.py](../joblazy/application_ui.py); missing sensitive facts require the user. |
+| Outcomes and tracker | Persist job states and recorded outcomes; export the canonical SQLite tracker as CSV. | [store.py](../joblazy/store.py), [dashboard.py](../joblazy/dashboard.py), [agent.py](../joblazy/agent.py); CSV is a snapshot and no mailbox synchronization is provided. |
+| Local safeguards and packaging | Exclude private runtime/profile data; retain vendor hashes and notices. Dashboard has loopback, token and origin protections. | [release builder](../scripts/build-release.py), [source audit](../scripts/check-public.py); not a general security certification. |
 
-## Implementation map
+Local processing/request limits protect helper operations. They are not a measurement of all host-chat tokens, a subscription allowance, or a promise of completed applications. See [operations](OPERATIONS.md).
 
-- Intake/profile: `onboarding.py`, `profile_edit.py`, `onboarding.html`, `profile.html`.
-- Search: `search.py`, `search_coordinator.py`, `search_missions.py`, `ats_postings.py`, `ats_registry.py`, `shortlist_flow.py`, `shortlist_review.py`.
-- Application screen: `application_ui.py`, `application.html`, `dashboard.py`.
-- Materials/forms: `materials.py`, `pipeline.py`, `checkpoints.py`, `assist.py`, `assist_bridge.py`.
-- Shared limits/history: `limits.py`, `store.py`, `model.py`, `worker.py`.
+## Work done with the accompanying agent
 
-See [release review](FRIEND-TEST-REVIEW.md) for remaining acceptance gates.
+Exact historical CV retrieval, interview briefs, company/territory research, outreach drafts, questionnaire copies and portfolio decks are described in the [casebook](USE-CASES.md). The agent can work from saved artifacts and user-provided evidence; those tasks are **not dedicated JobLazy modules**. Document creation and research depend on tools available in the host. Sending messages requires the user's instruction.
+
+## Verification and exclusions
+
+The [rc.3 verification report](AGENT-VERIFICATION.md) records 546 passing tests from a fresh Windows extraction, the fictional Codex intake exchange, source/privacy checks and their limits. The [status page](STATUS.md) preserves separate historical dashboard/live-model evidence and the unresolved receipt-observation issue. Live Claude Code operation and a new user's hardware/account remain untested.
+
+Automatic employer submission, automatic email reconciliation, automatic outreach and a guaranteed daily application count are not provided. No test count establishes hiring outcomes.

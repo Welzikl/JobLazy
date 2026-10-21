@@ -1,155 +1,149 @@
-# JobLazy in Codex or Claude Code
+<p align="center">
+  <img src="docs/screenshots/chat-workflow.svg" alt="JobLazy. Your job search, in the chat you already use. Bring your CV, find relevant roles, prepare applications and keep the story together." width="100%">
+</p>
 
-Use the same job-search workflow directly in your agent chat: confirm your CV and preferences, find verified roles, assess fit, review a tailored CV, prepare applications and keep one opportunity tracker.
+<p align="center">
+  <strong>A job-search workspace for Codex and Claude Code.</strong><br>
+  Bring your CV. Tell the agent what you want next.<br>
+  Work through real opportunities, tailored CVs and applications together.
+</p>
 
-**Get started:** download the current repository as a ZIP (GitHub **Code > Download ZIP**) or use the accompanying rc.3 package, extract it into a new folder, then open that folder in Codex or Claude Code. This repository is private, so GitHub downloads require access. The older rc.2 release download does not contain chat mode.
+<p align="center">
+  <a href="#start-in-three-steps">Get started</a> ·
+  <a href="#what-weve-actually-been-doing">Real use cases</a> ·
+  <a href="docs/USE-CASES.md">Example conversations</a> ·
+  <a href="docs/AGENT-VERIFICATION.md">What has been tested</a>
+</p>
 
-Paste this into your agent:
+## What is JobLazy?
+
+JobLazy brings the practical parts of a job search into one ongoing conversation: understanding your experience, finding relevant jobs, deciding which ones to pursue, making a truthful CV for each role, preparing supported application forms, and remembering what happened.
+
+You talk to **Codex or Claude Code using your own account**. The agent handles the local tools. JobLazy keeps your confirmed profile, job records, CV versions and application history in a workspace on your computer, so the next conversation can pick up from saved work.
+
+It grew out of a real job search. We kept needing more than a rewritten CV: the actual job description, a reason to apply, the right version of the document, the answers used on the form, and the context for a later interview. This project packages that workflow so someone else can start with their own experience.
+
+**You review your facts and documents. You make the final employer submission.**
+
+## What a session looks like
+
+These prompts illustrate the workflow; they are not a transcript or a claim of automatic results.
+
+| You say | What happens | What you keep |
+| --- | --- | --- |
+| “Here's my CV. I want to move into commercial roles.” | Read the CV, surface missing details and confirm your experience, target work and location. | Your original CV and a separate confirmed profile. |
+| “Find jobs that actually fit me.” | Search complementary sources, open employer postings, check relevance and remove duplicates. | Source links, saved job descriptions and a shortlist with reasons and gaps. |
+| “Is this one worth applying for?” | Assess the full role against your evidence and preferences. | A role-specific assessment that distinguishes strengths from uncertainties. |
+| “Tailor my CV for this role.” | Select relevant confirmed experience, draft with the existing template and check claims and layout. | A role-specific PDF for you to review. |
+| “Help me apply.” | Use the reviewed PDF and confirmed answers to prepare supported employer forms; ask about missing answers. | Prepared materials, a browser handoff and a record of what was actually done. |
+| “What have I applied to, and what's next?” | Read saved job states and recorded outcomes; export the same tracker for Excel. | One opportunity history and a CSV snapshot. |
+| “I've got an interview. What did I send them?” | Retrieve the exact saved application materials, then use the agent to prepare from that role and your evidence. | The relevant CV and an interview brief grounded in your application. |
+
+## What we've actually been doing
+
+The examples below come from earlier career-work sessions. They are anonymized: personal documents, employer receipts and private application records are not included in this repository. Some work used JobLazy's local tools; some used the accompanying agent and separate document tools. [The casebook explains the distinction.](docs/USE-CASES.md)
+
+### Find and prepare the right opportunities
+
+- **Search beyond one job board.** Combine target titles, adjacent responsibilities, employer sites and public ATS postings, then check the actual job description. Keep inaccessible leads separate from verified roles.
+- **Make different CVs for different roles.** Prepare role-specific versions for commercial, partnerships, business-development and revenue-operations opportunities. Select relevant evidence instead of sending one generic document everywhere.
+- **Revise a CV without losing the good parts.** Change a summary, emphasis or approved title while preserving the selected template, source facts and previous versions.
+- **Prepare the application around the exact document.** Review the PDF, use that version for the form, and answer missing questions from confirmed information.
+
+### Keep continuity after the application
+
+- **Recover the CV actually used.** When several applications existed for one employer, identify the exact role and match its saved upload record and file hash. A similar filename was not enough.
+- **Build a useful opportunity tracker.** Bring saved roles, fit reasons, latest events and outcome notes into one Excel-ready export. Distinguish prepared, submitted and uncertain outcomes.
+- **Prepare for a Commercial Associate interview.** Start from the saved role and CV; build a 60-second introduction, company motivation, evidence-based stories, likely questions, a territory-plan outline and role-play prompts. Keep company research separate from claims about the candidate.
+
+### Carry the work further with the agent
+
+These are examples of the broader career workflow, **not dedicated JobLazy automation modules**. They require the relevant source material and document, research or communication tools in the host agent.
+
+- **Company and territory research:** turn official sources into a sourced company brief, prospect research or an interview presentation, with evidence and gaps visible.
+- **Warm outreach drafts:** refine an interview-advice message into a short, low-pressure request. Drafting a message does not send it.
+- **Questionnaire completion:** fill a separate document copy from confirmed answers while preserving the original questions and business sections.
+- **Evidence-backed portfolios:** turn documented past work into an editable case-study deck and shareable PDF, keeping completed work distinct from proposed ideas.
+
+[**Explore all 12 use cases, example prompts and expected outputs →**](docs/USE-CASES.md)
+
+## Start in three steps
+
+### 1. Get a fresh copy
+
+Download the current repository using **Code → Download ZIP**, or extract the current rc.3 handoff ZIP you were given. Use a new folder for your own job search.
+
+This repository is private; GitHub downloads require access. **The older rc.2 release download does not include chat mode.** See [current status](docs/STATUS.md) for version history.
+
+### 2. Open the folder in Codex or Claude Code
+
+Use an agent that can read the project and run local helper commands. Sign in with your own account. Chat mode uses that session; there is no second AI login or separate API key for JobLazy.
+
+On Windows, the local helpers need **Python 3.12+, Node.js 22+, and Edge or Chrome**. The agent can check the setup and install project dependencies; missing system prerequisites still need installing. Web discovery requires working search/browser tools in your agent.
+
+### 3. Paste this and bring your CV
 
 > Use JobLazy in this chat. Read skills/joblazy/SKILL.md, check the setup, and help me get started with my own CV and job preferences.
 
-Codex supports `$joblazy`; Claude Code supports `/joblazy`. If the shortcut is not discovered, the prompt above works. The agent uses its current model/account and handles local setup and helper commands. **No second AI login is required for chat mode.** Python 3.12+, Node.js 22+ and Edge/Chrome are needed by the local document/browser helpers. Final employer Submit remains yours.
+Tell it what work you want, where you can work and what you want to avoid. It should help you confirm the important facts before creating a profile or tailoring applications.
 
-[Chat setup and workflow](docs/AGENT-QUICKSTART.md) · [Start Here](START%20HERE.txt) · [Verification](docs/AGENT-VERIFICATION.md)
+Codex's skill entrypoint is `$joblazy`; Claude Code's is `/joblazy`. If your host does not discover the shortcut, the explicit prompt above points it to the same instructions.
 
-The existing evidence checks, renderer, browser preparation and SQLite tracker are reused; this is not a replacement CV generator. Live web research depends on the host agent's tools. Nick's account and hardware and Claude Code's live execution have not been tested on this development PC.
+[Chat setup and helper commands](docs/AGENT-QUICKSTART.md) · [Start Here](START%20HERE.txt)
+
+## How the pieces fit together
+
+```mermaid
+flowchart LR
+    A[Your CV + preferences] --> B[Confirm your profile]
+    B --> C[Find + verify roles]
+    C --> D[Assess + choose]
+    D --> E[Tailor + review CV]
+    E --> F[Prepare supported forms]
+    F --> G[You submit + record outcome]
+    G --> H[Tracker + saved materials]
+    H --> I[Agent-assisted interview prep]
+```
+
+The current chat supplies reasoning and available web tools. JobLazy's local code handles intake, structured assessments, claim checks, the established CV renderer, reviewed-file checkpoints, browser preparation and the SQLite opportunity tracker. Chat mode reuses these implementations through [the agent bridge](joblazy/agent.py).
+
+Your originals and confirmed facts remain separate from generated drafts. A generated CV never becomes evidence for a new achievement. Private candidate data lives in ignored `local/` and `runtime/` folders and is excluded from the shareable source package. AI work uses the provider/account you are signed into; this is not an offline AI product.
+
+## What's ready, and what needs your judgment?
+
+**Current candidate: 0.1.0-rc.3.** The full suite passed **546 tests** from a clean Windows extraction. A real Codex chat-to-helper intake exchange also passed with a fictional CV. These establish local workflow behavior; they do not establish search quality or compatibility with every employer.
+
+- **Claude Code:** the entrypoint and shared chat bridge are included; a live Claude Code session and a new user's PC/account have not been tested.
+- **Applications:** supported form preparation is assisted. Final Submit and checked outcome recording remain human-controlled. A saved PDF, upload or local status is not proof of employer receipt.
+- **Coverage:** source access, host tools, employer forms and account allowances vary. There is no guaranteed application count or hiring outcome.
+- **Inbox and outreach:** automatic employer-email synchronization and automatic outreach are not shipped features. An earlier Gmail reconciliation attempt did not complete.
+
+Read the [verification report](docs/AGENT-VERIFICATION.md) and [status, including the unresolved receipt-observation issue](docs/STATUS.md) for the precise evidence and limits.
+
+## Prefer a dashboard?
+
+There is also an optional local browser dashboard using its existing Codex backend. It has a separate [Windows setup guide](docs/WINDOWS-QUICKSTART.md). For the chat experience, follow the three steps above.
 
 <details>
-<summary>Optional original Codex-backed dashboard and its earlier rc.2 download</summary>
+<summary>See the dashboard with fictional example data</summary>
 
-<p align="center">
-  <img src="docs/screenshots/cover.svg" alt="JobLazy. Find your next move. Start with your CV, explore your shortlist, review then apply." width="100%">
-</p>
+These screenshots show the dashboard, not a Codex/Claude conversation or a live employer application.
 
-<p align="center">
-  <strong>Your job search, with a little less admin.</strong><br>
-  Find roles, prepare a tailored CV, and get help filling application forms.<br>
-  You review the details and decide when to press Submit.
-</p>
-
-<p align="center">
-  <a href="https://github.com/Welzikl/JobLazy/releases/download/v0.1.0-rc.2/JobLazy-0.1.0-rc.2-windows.zip"><strong>⬇ Download for Windows</strong></a>
-  &nbsp; · &nbsp;
-  <a href="docs/WINDOWS-QUICKSTART.md">Setup guide</a>
-  &nbsp; · &nbsp;
-  <a href="https://github.com/Welzikl/JobLazy/releases/tag/v0.1.0-rc.2">Release notes</a>
-</p>
-
-> **Early access · v0.1.0-rc.2**<br>
-> Uses **GPT-6 Luna throughout** with your own Codex account. No Astra needed. This is a working test version: expect rough edges and check every CV and application.
-
-## What can it help with?
-
-| You want to… | JobLazy helps you… |
+| Search and shortlist | Review and preparation |
 | --- | --- |
-| Find a starting point | Upload your CV, correct your details, and describe the work you want next. |
-| Spend less time searching | Run six complementary searches, check job links, and remove duplicates. |
-| Decide which roles are worth a look | See a shortlist, then assess a selected job against your confirmed experience. |
-| Prepare your application | Make a tailored CV for you to check, then help fill supported employer forms. |
-| Remember what happened | Save answers, record application outcomes, and download your tracker. |
-
-## Start here — Windows
-
-**First time?** Accept your GitHub invitation and sign in before downloading. A 404 page usually means you are signed out or have not accepted access yet.
-
-### 1. Get the essentials
-
-You need **Python 3.12+**, **Node.js 22+**, **Edge or Chrome**, and **Codex signed in to your own account**. The [setup guide](docs/WINDOWS-QUICKSTART.md) explains the checks and common fixes. Your account must have access to Luna.
-
-### 2. Download and unpack
-
-[**Download JobLazy for Windows →**](https://github.com/Welzikl/JobLazy/releases/download/v0.1.0-rc.2/JobLazy-0.1.0-rc.2-windows.zip)
-
-Right-click the ZIP → **Extract All**. Open the extracted folder. Choose the file named **JobLazy-0.1.0-rc.2-windows.zip**, rather than GitHub's separate “Source code” downloads.
-
-### 3. Set up once, then open
-
-Double-click **Setup.cmd** and follow its messages. When it finishes, double-click **Start JobLazy.cmd**. JobLazy opens in your browser; keep the small launcher window open while you use it.
-
-### 4. Make it yours
-
-Upload your CV, check the extracted details, and tell JobLazy what you want next. Start a search, choose a role, and review its assessment and tailored CV before preparing the employer form.
-
-**No coding is needed for the normal workflow.** You will see command windows during setup and launch. JobLazy runs on your PC and needs an internet connection.
-
-## Take a look
-
-These are screenshots of the real interface using **fictional test data**. They show the workflow; they are not a promise of the jobs or results you will receive.
-
-<table>
-<tr>
-<th width="50%">Build your search</th>
-<th width="50%">Review your application</th>
-</tr>
-<tr>
-<td valign="top">Choose the work and location you want. Check the search plan, then explore your shortlist.</td>
-<td valign="top">Check your CV, answer missing questions, and continue in the open employer form.</td>
-</tr>
-<tr>
-<td valign="top"><a href="docs/screenshots/search.png"><img src="docs/screenshots/search.png" alt="JobLazy search screen: career brief, editable search plan, search controls and a fictional shortlist" width="100%"></a></td>
-<td valign="top"><a href="docs/screenshots/application.png"><img src="docs/screenshots/application.png" alt="JobLazy application screen with CV review, form preparation and confirmed answer controls" width="100%"></a></td>
-</tr>
-</table>
-
-## Will it work with my usual Codex subscription?
-
-JobLazy uses **your own Codex sign-in**. There is no separate API key to enter and no Astra dependency. Your subscription's actual model access and usage allowance still apply; a £20 subscription does not guarantee a particular number of applications.
-
-To keep usage down, JobLazy reuses saved work, uses Luna for AI tasks, and uses ordinary code for job feeds, duplicate removal, PDFs and tracking. Each new web search runs six short search missions, with up to three running together. Reopening saved results does not start another search.
-
-The app stops at **25 processing attempts** or **50 new AI request reservations per UTC day**. One application can need several attempts and requests, so **25 is a safety ceiling, not 25 promised applications**. It will stop if your account runs out of allowance; it will not switch models or buy credits.
-
-[More about usage and limits →](docs/ECONOMICAL-USAGE.md)
-
-## You stay in control
-
-- **Your facts:** correct your profile and review every generated CV. AI wording can be wrong.
-- **Your application:** supported fields can be prepared, but final Submit is yours. Check the employer's form yourself.
-- **Your records:** your CV, answers and history are saved in local folders on your PC. Relevant text goes through your Codex account for AI tasks, and job searches and forms contact external sites.
-- **Your privacy:** nobody else's profile or account is included in the download. Keep your private data folders and raw logs out of GitHub issues.
-
-Email replies and LinkedIn outreach are planned for later. Some employer forms will need manual work. Image-only scanned CVs need a text-readable copy.
-
-## What has been checked?
-
-**539 automated tests passed** from the exact Windows release ZIP. Setup and launch worked from a clean extraction on an existing Windows development PC. The full application journey was tested with fictional data and a local employer form; nothing was submitted.
-
-A separate live Luna trial completed CV intake, search, assessment and CV generation. Search and review took about **86 seconds**, but produced only **one stretch recommendation** from three verified postings. That small sample does not establish broad search quality, form reliability or performance on your account.
-
-The ZIP was downloaded back from GitHub and its SHA-256 matched the tested file. Remote CI has an intermittent submission-receipt test failure under review; see [current verification](docs/STATUS.md). The local result above is separate. This remains an early-access release.
-
-[Verification details](docs/STATUS.md) · [Full feature list](docs/FEATURES.md) · [Release evidence](https://github.com/Welzikl/JobLazy/releases/tag/v0.1.0-rc.2)
-
-## Something not working?
-
-Start with the [Windows help guide](docs/WINDOWS-QUICKSTART.md#if-something-stops). To report a problem, [open a bug report](https://github.com/Welzikl/JobLazy/issues/new?template=bug_report.md) with the step you reached, what you expected, and what happened. Remove personal information from screenshots first.
-
-<details>
-<summary><strong>For developers and existing personal-preset users</strong></summary>
-
-The Windows launcher selects the friend preset. Plain `dashboard` retains the personal preset: Luna search, Astra review/assessment and Terra intake/preparation. Selecting the friend preset does not migrate or replace existing personal data.
-
-```powershell
-.\.venv\Scripts\python.exe -m joblazy dashboard --preset friend --browser-channel msedge
-```
-
-Run checks in a disposable source-only copy:
-
-```powershell
-.\.venv\Scripts\python.exe scripts\verify-vendor.py
-.\.venv\Scripts\python.exe -m unittest discover -s tests -t . -v
-```
-
-Run `python scripts/check-public.py --source-tree` on a clean extraction before setup, or `python scripts/check-public.py` in a Git checkout. Some browser tests require Chrome. The connected friend journey also supports Edge via `JOBLAZY_TEST_BROWSER_CHANNEL=msedge`.
-
-[Operations](docs/OPERATIONS.md) · [Profile setup](docs/PROFILE.md) · [Search behavior](docs/SEARCH.md)
-
-This Python app runs locally. GitHub hosts its documentation and downloads; GitHub Pages does not run its backend.
+| ![Dashboard search plan and fictional shortlist](docs/screenshots/search.png) | ![Dashboard CV review and application preparation](docs/screenshots/application.png) |
 
 </details>
 
----
+## Explore the project
 
-[MIT License](LICENSE) · [Third-party acknowledgements](THIRD_PARTY.md)
+| Guide | What it covers |
+| --- | --- |
+| [Use-case casebook](docs/USE-CASES.md) | Real workflow examples, prompts, outputs and boundaries. |
+| [Feature inventory](docs/FEATURES.md) | Chat, dashboard and agent-assisted capabilities, with implementation links. |
+| [Chat quickstart](docs/AGENT-QUICKSTART.md) | Setup and the commands the agent operates. |
+| [Search](docs/SEARCH.md) · [Profile](docs/PROFILE.md) | Discovery sources, candidate facts and targeting. |
+| [Operating guide](docs/OPERATIONS.md) · [Agent rules](docs/AGENT-RULES.md) | State, limits, evidence and runtime safeguards. |
+| [Verification](docs/AGENT-VERIFICATION.md) · [Status](docs/STATUS.md) | Tested behavior and remaining limitations. |
 
-</details>
+Built with retained open-source components. See [LICENSE](LICENSE) and [third-party notices](THIRD_PARTY.md).

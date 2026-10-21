@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="560" viewBox="0 0 1280 560" role="img" aria-labelledby="title description">
+  <title id="title">JobLazy — your job search, in the chat you already use.</title>
+  <desc id="description">A workspace for Codex and Claude Code. Start with your CV, find relevant roles, prepare applications and keep the story together.</desc>
+  <rect width="1280" height="560" rx="24" fill="#eef3fa"/>
+  <rect x="48" y="48" width="44" height="44" rx="12" fill="#2346d8"/>
+  <path d="M62 62h15v13c0 8-13 8-13 0" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <g font-family="Segoe UI,Arial,sans-serif" fill="#182541">
+    <text x="108" y="80" font-size="27" font-weight="700">JobLazy</text>
+    <text x="1230" y="77" text-anchor="end" font-size="17" fill="#52627d">FOR CODEX + CLAUDE CODE</text>
+    <text x="48" y="176" font-size="58" font-weight="700">Your next move starts</text>
+    <text x="48" y="244" font-size="58" font-weight="700">with a conversation.</text>
+    <text x="50" y="297" font-size="23" fill="#52627d">Bring your CV. Find relevant roles. Prepare with confidence.</text>
+    <rect x="48" y="350" width="1184" height="128" rx="18" fill="white"/>
+    <g font-size="15" font-weight="700" fill="#2346d8">
+      <text x="78" y="388">01 / YOUR EVIDENCE</text>
+      <text x="376" y="388">02 / YOUR OPTIONS</text>
+      <text x="674" y="388">03 / YOUR APPLICATION</text>
+      <text x="972" y="388">04 / YOUR NEXT STEP</text>
+    </g>
+    <g font-size="23" font-weight="600">
+      <text x="78" y="426">CV + preferences</text>
+      <text x="376" y="426">Verified shortlist</text>
+      <text x="674" y="426">Tailor + review</text>
+      <text x="972" y="426">Track + prepare</text>
+    </g>
+    <g font-size="15" fill="#52627d">
+      <text x="78" y="452">Confirm what is true.</text>
+      <text x="376" y="452">Choose what fits.</text>
+      <text x="674" y="452">Use the right materials.</text>
+      <text x="972" y="452">Keep the context.</text>
+    </g>
+    <text x="50" y="519" font-size="16" fill="#52627d">Your facts. Your account. Your final decision to submit.</text>
+  </g>
+</svg>
