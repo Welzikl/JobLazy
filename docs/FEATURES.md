@@ -1,6 +1,6 @@
 # JobLazy capabilities
 
-Reviewed 21 October 2026 for 0.1.0-rc.3. Start with the [main page](../README.md) or [use-case casebook](USE-CASES.md). This inventory describes the implementation; it does not certify broad live-site reliability.
+Reviewed 21 October 2026 for 0.1.0-rc.4, which retains the rc.3 runtime. Start with the [main page](../README.md) or [use-case casebook](USE-CASES.md). This inventory describes the implementation; it does not certify broad live-site reliability. See the [current release report](RELEASE-rc4.md).
 
 ## Ways to use it
 

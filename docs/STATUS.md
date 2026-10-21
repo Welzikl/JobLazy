@@ -1,4 +1,12 @@
-# Current development candidate - 21 October 2026
+# Current release candidate — 0.1.0-rc.4
+
+The current [Windows download](https://github.com/Welzikl/JobLazy/releases/tag/v0.1.0-rc.4) packages direct Codex/Claude Code chat operation, the original job-rating system, updated handoff instructions and the redesigned repository page. Read the [release verification report](RELEASE-rc4.md) and [chat setup](AGENT-QUICKSTART.md).
+
+All **546 tests passed in 538.047 seconds** from a fresh Windows extraction with freshly installed pinned dependencies. Agent-mode setup, source/privacy audit, vendor verification, documentation links and desktop/phone graphics passed. Final runtime/tests/setup bytes match the tested extraction; final documentation changes are described in the report. This remains an early-access prerelease with the live-host and employer-coverage limits below.
+
+The older release assets remain unchanged. The following sections preserve earlier evidence and do not supersede the rc.4 report.
+
+# Previous chat candidate — 0.1.0-rc.3
 
 Version 0.1.0-rc.3 adds direct Codex/Claude Code chat operation. Read [chat setup](AGENT-QUICKSTART.md) and [current verification](AGENT-VERIFICATION.md). The older rc.2 GitHub release is unchanged and does not contain chat mode.
 

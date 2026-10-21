@@ -6,7 +6,7 @@ JOBLAZY - USE IT IN CODEX OR CLAUDE CODE
 
 Use JobLazy in this chat. Read skills/joblazy/SKILL.md, check the setup,
 and help me get started with my own CV and job preferences. Use my current
-agent account. Find and verify suitable jobs, tailor factual CVs, prepare
+agent account. Find, verify and rate suitable jobs, tailor factual CVs, prepare
 applications for my review, and keep my opportunity tracker updated.
 
 Codex shortcut: $joblazy
@@ -21,8 +21,14 @@ developer credentials, CV or application history are included.
 First confirm your CV facts and preferences in chat. Review generated CVs
 before use. Review employer forms yourself; the final Submit is yours.
 
+Ask for the overall job score out of 100 and all five ratings: CV fit,
+career direction, compensation, culture/working conditions and red flags.
+Each dimension is 1-5 or Unknown, with reasons and evidence. The overall
+score is a holistic fit judgment, not your chance of getting hired.
+
 The chat mode does not need Setup.cmd or Start JobLazy.cmd. Those launch the
 optional older dashboard, which uses Codex CLI separately.
 
 Detailed agent instructions: docs/AGENT-QUICKSTART.md
+Current package verification: docs/RELEASE-rc4.md
 This is an early-access package. Employer forms and account access vary.
