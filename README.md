@@ -73,7 +73,7 @@ These are examples of the broader career workflow, **not dedicated JobLazy autom
 
 Download the current repository using **Code → Download ZIP**, or extract the current rc.3 handoff ZIP you were given. Use a new folder for your own job search.
 
-This repository is private; GitHub downloads require access. **The older rc.2 release download does not include chat mode.** See [current status](docs/STATUS.md) for version history.
+Use the current main branch for chat mode. **The older rc.2 release download does not include chat mode.** See [current status](docs/STATUS.md) for version history.
 
 ### 2. Open the folder in Codex or Claude Code
 
